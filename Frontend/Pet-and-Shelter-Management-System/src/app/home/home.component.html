@@ -1,0 +1,157 @@
+<header
+  class="navbar navbar-expand navbar-dark bd-navbar fixed-top"
+  style="background-color: #008182"
+>
+  <div class="container-fluid px-4">
+    <div class="navbar-nav">
+      <div class="logo">
+        <a routerLink="/home">Pet Care</a>
+      </div>
+      <!-- Add a button for mobile navigation (optional) -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+
+    <div class="navbar-nav flex-grow-1">
+      <div class="navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" (click)="open_Contact()">Contact Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="open_about()">About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <a class="nav-link">
+      <div class="user-link" (click)="toggleUserSidebar()">
+        <i class="fa-regular fa-circle-user fa-2x" style="cursor: pointer"></i>
+      </div>
+      <div class="user-sidebar" [ngClass]="{ open: isUserSidebarOpen }">
+        <button class="close-button" (click)="closeUserSidebar()">
+          <i class="fa-solid fa-xmark fa-2x" id="red-icon"></i>
+        </button>
+        <ng-container *ngIf="!isLogin">
+          <div class="not-logged">
+            <!-- Display this when user is not logged in -->
+            <p style="color: white; font-size: 38px; font-weight: 600">
+              You are not logged in.
+            </p>
+
+            <button (click)="login()" class="fa fa-signin">
+              <span class="fa fa-sign-in"></span> Log In
+            </button>
+            <button (click)="register()" class="fa fa-registered">
+              Register
+            </button>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="isLogin">
+          <div class="logged-in">
+            <div class="title">
+              <p style="color: white; font-size: 40px">Hey</p>
+              <p
+                style="
+                  color: white;
+                  font-size: 40px;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                "
+              >
+                <span> {{ curruser.first_name }}</span>
+              </p>
+            </div>
+            <!-- <div class="user-info">
+                <div class="left">
+                 
+                  <p>Email: <span>{{ user.email }}</span></p>
+                  <p>Country: <span>{{user.country}}</span></p>
+                  <p>Company Name: <span>{{ user.company_name }}</span></p>
+                  
+                </div>
+                <div class="right">
+                  <img src="{{user.img}}">
+                </div>
+  
+              </div> -->
+            <div class="buttons">
+              <button (click)="goTouserPage()" *ngIf="!isadmin">
+                Go To User Page
+              </button>
+              <button (click)="goToadminPage()" *ngIf="isadmin">
+                Go To Admin Page
+              </button>
+            </div>
+            <div class="logout">
+              <button (click)="logout()" class="fa fa-sign-out">logout</button>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </a>
+  </div>
+</header>
+
+<div class="contain">
+  <div class="discoverexamswidgets">
+    <!-- ngfor ya kimoo -->
+    <div
+      *ngFor="let pet of petArray; let i = index"
+      class="card card-body upcoming"
+    >
+      <!-- Not taken again -->
+      <div class="name2">
+        <!-- <img [src]="current_user.photo" alt="" class="image" /> -->
+        <img
+          [src]="pet.image"
+          class="image"
+          style="background-color: #008182"
+        />
+        <div class="name1" style="margin-top: 10px">
+          <h5 class="card-title">{{ pet.name }}</h5>
+          <h5 class="card-title" id="id">#{{ pet.id }}</h5>
+        </div>
+      </div>
+
+      <div class="discoverbox1">
+        <div class="discoverinfo">
+          <div class="pet_description">
+            <h3><u>Information</u></h3>
+          </div>
+          <ul>
+            <li>Age: {{ pet.age }}</li>
+            <li>Gender: {{ pet.gender }}</li>
+            <li>species: {{ pet.species }}</li>
+            <li>Breed: {{ pet.breed }}</li>
+            <li>Behavior: {{ pet.shelter_name }}</li>
+            <li>Health Status: {{ pet.health_status }}</li>
+            <li>Behavior: {{ pet.behavior }}</li>
+            <!-- <li>Behavior: {{ pet.description }}</li> -->
+          </ul>
+          <div class="pet_description">
+            <h3><u>description</u></h3>
+            {{ pet.description }}
+          </div>
+        </div>
+
+      </div>
+      <button
+      class="discoverbtns btn_details"
+    >
+     More Details
+    </button>
+    </div>
+  </div>
+</div>

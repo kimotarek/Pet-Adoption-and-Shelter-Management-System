@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Pet-and-Shelter-Management-System';
+  
+  constructor(private router: Router) {
+    const previousUrl = localStorage.getItem('previousUrl');
+    if (previousUrl) {
+      router.navigateByUrl(previousUrl);
+      localStorage.removeItem('previousUrl');
+    }
+    //  this.router.navigate(['']);
+  }
 }

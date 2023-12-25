@@ -1,0 +1,422 @@
+div {
+    font-family: "Montserrat", sans-serif ;
+    line-height: normal;
+  }
+  .contain{
+    margin-top: 5rem;
+
+  }
+  
+  .navbar {
+    width: 100vw;
+  }
+  .navbar.navbar-expand-lg {
+    width: 100vw;
+  }
+  .navbar-nav .nav-link {
+    color: #ffffff; /* Set the color to white */
+  }
+  .navbar-nav .nav-link:hover {
+    color: gray; /* Change the color on hover */
+  }
+  .navbar-nav .nav-item.active .nav-link {
+    color: #ffffff;
+    font-weight: bold;
+  }
+  .nav-link {
+    color: white;
+    font-weight: 650;
+  }
+  .nav-link1 {
+    width: 20vw; /* 100% of the viewport width */
+    height: 20vh; /* 100% of the viewport height */
+    color: white;
+    font-weight: 650;
+  }
+  .navbar-brand {
+    color: white;
+    font-size: 35px;
+    font-weight: 600;
+  }
+  .nav-link i {
+    margin-left: 10px;
+    color: #071333;
+  }
+  .navbar{
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  
+  .user-link {
+    cursor: pointer;
+  }
+  
+  .user-sidebar {
+    position: fixed;
+    top: 0;
+    right: -700px; /* Initially hidden to the right */
+    height: 100%;
+    width: 700px;
+    background-color: #1b1c1d;
+    box-shadow: -2px 0px 5px rgba(0, 0, 0, 0.2);
+    transition: right 0.3s ease-in-out; /* Add a smooth animation */
+  }
+  .user-sidebar.open {
+    right: 0; /* Slide in from the right when open */
+    width: 700px;
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .user-sidebar .not-logged p {
+    font-size: larger;
+    font-weight: 600;
+  }
+  .user-sidebar .not-logged button {
+    width: 200px;
+    height: 50px;
+    background-color: #008182;
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    border-radius: 2rem;
+    cursor: pointer;
+  }
+  .user-sidebar .not-logged button:hover {
+    background-color: #008182;
+  }
+  .user-sidebar .logged-in {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2rem;
+    /* border: 3px solid #ccc; */
+    height: 60vh;
+    width: 35vw;
+  }
+  .user-sidebar .buttons button {
+    width: 200px;
+    height: 50px;
+    background-color: #008182;
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    border-radius: 2rem;
+    cursor: pointer;
+  }
+  .user-sidebar .buttons button:hover {
+    background-color: #008182;
+  }
+  .user-sidebar .logged-in span {
+    color: #ff7782;
+  }
+  .user-sidebar .logged-in .title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .user-sidebar .logged-in .title {
+    height:fit-content;
+  }
+  .user-sidebar .logged-in .title p {
+    font-size: 30px;
+    font-weight: 600;
+  }
+  .user-sidebar .logged-in .user-info p {
+    font-size: 20px;
+    font-weight: 700;
+  }
+  .user-sidebar .logged-in .user-info .left {
+    display: flex;
+    flex-direction: column;
+  
+    gap: 1rem;
+  }
+  .user-sidebar .logged-in .user-info {
+    margin-top: 2rem;
+    display: flex;
+    gap: 3rem;
+  }
+  .user-sidebar .logged-in .right img {
+    height: 250px;
+  }
+  .user-sidebar .logged-in .logout {
+    margin-top: 3rem;
+  }
+  .user-sidebar .logged-in .logout button {
+    width: 200px;
+    height: 50px;
+    background-color: red;
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    border-radius: 2rem;
+    cursor: pointer;
+  }
+  .user-sidebar .logged-in .logout button:hover {
+    background-color: #8d3a95;
+  }
+  .logo a {
+    all:unset;
+    width: 100%;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+  }
+  .logo a:hover {
+    color: gray; /* Change the color on hover */
+  }
+  #red-icon {
+    color: red;
+  }
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: red;
+    background-color: transparent;
+    border-radius: 50%;
+    width: 5vw;
+    height: 4vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+  }
+
+
+
+  .discoverexamswidgets {
+    display: flex;
+    flex-direction: row;
+    margin-left: 2%;
+    margin-bottom: 2%;
+    flex-wrap: wrap;
+    width: 98%;
+  }
+  .discoverexamswidgets {
+    width: 100%;
+    overflow: unset;
+  }
+  .card {
+    width: 100%;
+    margin-right: 0;
+    width: 22vw;
+    height: 38vh;
+    margin-right: 2%;
+    margin-bottom: 15px;
+  }
+  .card h5 {
+    align-items: left;
+    font-size: 28px;
+    font-family: "Montserrat";
+    font-weight: 500;
+    line-height: 100%;
+  }
+  .card a {
+    font-size: 12px;
+    font-family: "Montserrat";
+    font-weight: 700;
+    text-decoration: underline;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    transition: 0.5s;
+    font-size: 16px;
+
+  }
+  
+  .card a:hover {
+    font-size: 15px;
+  }
+  .card h5 {
+    font-size: 16px;
+  }
+  .card-body {
+    padding: 0;
+    width: 100%;
+  }
+  .upcoming {
+    border-radius: 10px;
+    background: radial-gradient(
+        313.28% 209.98% at 99.43% 99.22%,
+        #dff 0%,
+        rgba(235, 247, 248, 0) 100%
+      ),
+      #fff;
+    box-shadow: 0px 0px 25px 0px rgba(0, 129, 130, 0.15);
+  }
+  .upcoming a {
+    color: #006a6a;
+  }
+  .upcoming h5 {
+    color: #006a6a;
+    font-size: 22px;
+  }
+  .upcoming h5 {
+    font-size: 18px;
+  }
+  .name2 {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    align-items: center; /* Add this line to center vertically */
+    position: relative;
+  }
+  
+  .name2 h5 {
+    font-size: 14px;
+  }
+  
+  .name2 h5 {
+    font-size: 14px;
+  }
+  .name1 {
+    margin-left: 10px;
+  }
+  .name1 h5 {
+    font-size: 19px;
+  }
+  .image {
+    display: inline;
+    width: 100px;
+    height: 100px;
+    margin-top: 1rem;
+    margin-right: 1rem;
+    background-repeat: no-repeat;
+    border-radius: 20px;
+  }
+  .discoverbox1 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start; /* Align content to the left */
+    margin-top: 10px;
+    flex: 1; /* This will make discoverbox1 take up the remaining available space */
+    margin-left: 2rem;
+  }
+  
+  .discoverinfo {
+    display: flex;
+    flex-direction: column;
+    width: 100%; /* Adjust the width to take up the full available space */
+    color: #008182;
+    font-weight: 520;
+    text-align: left; /* Align the text to the left */
+  }
+  .discoverinfo li{
+    margin-bottom: .3rem;
+  }
+
+  .pet_description{
+    margin-left: 1.2rem;
+  }
+  
+
+  .contain {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .card {
+    box-sizing: border-box; /* Include padding and border in the width */
+    width: 48%; /* Adjust the width to leave some space for margin/padding and to ensure a two-column layout */
+    margin: 1%; /* Add some margin for spacing between the cards */
+    min-height: 90vh;
+    max-height: 110vh;
+  }
+
+  .btn_details {
+    border-radius: 8px;
+    background: #F79051;
+    outline: none;
+    border: none;
+    box-shadow: 0px 0px 7px 0px rgba(0, 129, 130, 0.16);
+    color: white;;
+    font-weight: 500;
+    width: 90%;
+    height: 5vh;
+    padding: 5px;
+    font-size: small;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    margin-left: 2.1rem;
+  }
+  
+  /* Adjustments for smaller screens */
+  @media (max-width: 768px) {
+    .card {
+      width: 100%; /* Make the cards take up the full width on smaller screens */
+      margin: 1% 0; /* Adjust margin for spacing on smaller screens */
+      height:fit-content;
+    }
+  }
+  
+ 
+
+
+  /* #logo1 {
+    width: 100px; 
+    height: 67px;
+
+    display: flex;
+    background-color: none;
+    background: url("../../assets/images/pet-care.jpg") no-repeat;
+    margin-left: 1vw;
+    margin-top: 1vh;
+    justify-content: center;
+    align-items: center; 
+  } */
+    
+
+  
+  @media (max-width: 600px) {
+  
+    .navbar-nav .nav-link {
+      font-size: 2vw;
+      padding: 3px;
+    }
+    .navbar-nav .navbar-brand {
+      font-size: 4vw;
+    }
+
+  }  
+  @media (max-width: 700px) {
+     .user-sidebar.open {
+      width:100%;
+    }
+    .user-sidebar .not-logged  {
+      width: 100%;
+      display: block;
+      justify-content: center;
+      align-items: center;
+      }
+      .user-sidebar .logged-in{
+        width: 100%;
+        border: none;
+      }
+      .user-sidebar .logged-in .title{
+        width: 80vw;
+        border: none;
+        margin-bottom: 2rem;
+      }
+    .user-sidebar .not-logged p {
+      width: 100%;
+  
+    }
+    .user-sidebar .not-logged button {
+      margin-top: 1vw;
+    }
+  }
+  
+  
