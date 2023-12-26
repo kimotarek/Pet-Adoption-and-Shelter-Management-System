@@ -11,6 +11,9 @@ import { HomeComponent } from './home/home.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { AddShelterComponent } from './add-shelter/add-shelter.component';
 import { AddStaffComponent } from './add-staff/add-staff.component';
+import { StaffHomeComponent } from './staff-home/staff-home.component';
+import { AddPetComponent } from './add-pet/add-pet.component';
+import { ShowApplicationComponent } from './show-application/show-application.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +25,9 @@ import { AddStaffComponent } from './add-staff/add-staff.component';
     AdminHomeComponent,
     AddShelterComponent,
     AddStaffComponent,
+    StaffHomeComponent,
+    AddPetComponent,
+    ShowApplicationComponent,
   ],
   imports: [
     BrowserModule,

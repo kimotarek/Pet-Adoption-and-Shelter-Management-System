@@ -1,0 +1,394 @@
+<div class="locations">
+  <button data-toggle="modal" data-target="#add" class="add">
+    Add Pet <i class="fa-solid fa-plus"></i>
+  </button>
+  <!-- ng for -->
+  <div
+    *ngFor="let pet of petArray; let i = index"
+    class="card card-body taken"
+    style="color: #006666"
+  >
+    <div class="remove_edit">
+      <button
+        data-toggle="modal"
+        data-target="#edit"
+        (click)="edit(pet, i)"
+      >
+        <i class="fa-solid fa-pen"></i>
+      </button>
+      <button
+        (click)="remove(pet, i)"
+        data-toggle="modal"
+        data-target="#confirm"
+      >
+        <i class="fa-solid fa-trash"></i>
+      </button>
+    </div>
+    <div class="name2">
+      <img [src]="pet.image" class="image" style="background-color: #008182" />
+      <div class="name1" style="margin-top: 10px">
+        <h5>{{ pet.name }}</h5>
+        <h5 id="id">#{{ pet.id }}</h5>
+      </div>
+    </div>
+
+    <div class="pet_description">
+      <h3><u>Information</u></h3>
+    </div>
+    <ul>
+      <li>Age: {{ pet.age }}</li>
+      <li>Gender: {{ pet.gender }}</li>
+      <li>species: {{ pet.species }}</li>
+      <li>Breed: {{ pet.breed }}</li>
+      <li>Health Status: {{ pet.health_status }}</li>
+      <li>Behavior: {{ pet.behavior }}</li>
+    </ul>
+    <div class="pet_description">
+      <h3><u>description</u></h3>
+      {{ pet.description }}
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="add"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+        <button
+          type="button"
+          class="close close1"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="close_popup()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Pet Name:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput1"
+            placeholder="Enter Name of Pet"
+            #pet_name
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput2">Pet Age</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput2"
+            placeholder="Enter Age of Pet"
+            #pet_age
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput3">pet Gender</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput3"
+            placeholder="Enter Gender of pet"
+            #pet_Gender
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput3">pet Species</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput3"
+            placeholder="Enter species of pet"
+            #pet_species
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput3">pet Breed</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput3"
+            placeholder="Enter breed of pet"
+            #pet_Breed
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput3">pet Health Status</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput3"
+            placeholder="Enter Health Status of pet"
+            #pet_Health
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput3">pet behavior</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput3"
+            placeholder="Enter behavior of pet"
+            #pet_behavior
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput3">pet Description</label>
+          <textarea
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput3"
+            placeholder="Enter Description of pet"
+            #pet_Description
+          ></textarea>
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput3" style="display: block"
+            >pet Photo</label
+          >
+          <input
+            type="file"
+            id="photo"
+            name="photo"
+            accept="image/*"
+            capture="camera"
+            (change)="onPhotoselect($event)"
+          />
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button
+          (click)="
+            add_pet(
+              pet_name.value,
+              pet_age.value,
+              pet_species.value,
+              pet_Breed.value,
+              pet_Health.value,
+              pet_Description.value,
+              pet_behavior.value,
+              pet_Gender.value
+            )
+          "
+          type="button"
+          id="addpet"
+        >
+          Add <i class="fa-solid fa-plus"></i>
+        </button>
+        <button
+          (click)="close_popup()"
+          type="button"
+          id="addpet"
+          style="background-color: #ff0052"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="edit"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+        <button
+          type="button"
+          class="close close1"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="close_popup()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Pet Name:</label>
+            <input
+              type="text"
+              [value]="edit_ad.name"
+              class="form-control"
+              id="exampleFormControlInput1"
+              placeholder="Enter Name of Pet"
+              #ed_pet_name
+            />
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput2">Pet Age</label>
+            <input
+            [value]="edit_ad.age"
+              type="text"
+              class="form-control"
+              id="exampleFormControlInput2"
+              placeholder="Enter Age of Pet"
+              #ed_pet_age
+            />
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput3">pet Gender</label>
+            <input
+            [value]="edit_ad.gender"
+              type="text"
+              class="form-control"
+              id="exampleFormControlInput3"
+              placeholder="Enter Gender of pet"
+              #ed_pet_Gender
+            />
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput3">pet Species</label>
+            <input
+            [value]="edit_ad.species"
+              type="text"
+              class="form-control"
+              id="exampleFormControlInput3"
+              placeholder="Enter species of pet"
+              #ed_pet_species
+            />
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput3">pet Breed</label>
+            <input
+            [value]="edit_ad.breed"
+
+              type="text"
+              class="form-control"
+              id="exampleFormControlInput3"
+              placeholder="Enter breed of pet"
+              #ed_pet_Breed
+            />
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput3">pet Health Status</label>
+            <input
+            [value]="edit_ad.health_status"
+
+              type="text"
+              class="form-control"
+              id="exampleFormControlInput3"
+              placeholder="Enter Health Status of pet"
+              #ed_pet_Health
+            />
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput3">pet behavior</label>
+            <input
+             [value]="edit_ad.behavior"
+              type="text"
+              class="form-control"
+              id="exampleFormControlInput3"
+              placeholder="Enter behavior of pet"
+              #ed_pet_behavior
+            />
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput3">pet Description</label>
+            <textarea
+            [value]="edit_ad.description"
+              type="text"
+              class="form-control"
+              id="exampleFormControlInput3"
+              placeholder="Enter Description of pet"
+              #ed_pet_Description
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput3" style="display: block"
+              >pet Photo</label
+            >
+            <input
+              type="file"
+              id="photo"
+              name="photo"
+              accept="image/*"
+              capture="camera"
+              (change)="onPhotoselect($event)"
+            />
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          (click)="
+            totaly_edit(ed_pet_name.value,ed_pet_age.value,ed_pet_Gender.value,ed_pet_behavior.value,ed_pet_Breed.value,ed_pet_Health.value,ed_pet_species.value,ed_pet_Description.value)
+          "
+          type="button"
+          id="edit"
+        >
+          Edit Pet Information <i class="fa-solid fa-plus"></i>
+        </button>
+        <button
+          (click)="close_popup()"
+          type="button"
+          id="edit"
+          style="background-color: #ff0052"
+        >
+          Cancel Edit
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="confirm"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">
+          <p style="color: red">Confirmation Remove</p>
+        </h5>
+        <button
+          type="button"
+          class="close close1"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="close_popup()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="color: red">
+        Are you sure you want to remove Shelter of {{ remove_ad.name }}?
+      </div>
+      <div class="modal-footer">
+        <button (click)="totaly_remove()" class="discoverbtns btn_exam">
+          YES
+        </button>
+        <button
+          style="background-color: #ff0052"
+          class="discoverbtns btn_exam"
+          (click)="close()"
+        >
+          NO
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

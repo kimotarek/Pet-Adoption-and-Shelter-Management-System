@@ -1,8 +1,8 @@
 <div class="locations">
     <button
       data-toggle="modal"
-      data-target="#addlocationmodal"
-      class="addlocationbtn"
+      data-target="#add"
+      class="add"
     >
       Add Shelter <i class="fa-solid fa-plus"></i>
     </button>
@@ -14,7 +14,7 @@
       <div class="remove_edit">
         <button
           data-toggle="modal"
-          data-target="#editlocationmodal"
+          data-target="#edit"
           (click)="edit_address(sh, i)"
         >
           <i class="fa-solid fa-pen"></i>
@@ -22,7 +22,7 @@
         <button
           (click)="remove_address(sh, i)"
           data-toggle="modal"
-          data-target="#confirm_adress"
+          data-target="#confirm"
         >
           <i class="fa-solid fa-trash"></i>
         </button>
@@ -66,7 +66,7 @@
 
   <div
   class="modal fade"
-  id="addlocationmodal"
+  id="add"
   tabindex="-1"
   role="dialog"
   aria-labelledby="exampleModalCenterTitle"
@@ -149,7 +149,7 @@
 
 <div
   class="modal fade"
-  id="editlocationmodal"
+  id="edit"
   tabindex="-1"
   role="dialog"
   aria-labelledby="exampleModalCenterTitle"
@@ -224,7 +224,7 @@
 
 <div
   class="modal fade"
-  id="confirm_adress"
+  id="confirm"
   tabindex="-1"
   role="dialog"
   aria-labelledby="exampleModalCenterTitle"

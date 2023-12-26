@@ -330,9 +330,9 @@ div {
   
   .card {
     box-sizing: border-box; /* Include padding and border in the width */
-    width: 48%; /* Adjust the width to leave some space for margin/padding and to ensure a two-column layout */
+    width: 28%; /* Adjust the width to leave some space for margin/padding and to ensure a two-column layout */
     margin: 1%; /* Add some margin for spacing between the cards */
-    min-height: 90vh;
+    min-height: 58vh;
     max-height: 110vh;
   }
 
@@ -352,6 +352,62 @@ div {
     margin-top: 1rem;
     margin-left: 2.1rem;
   }
+  .modal-title {
+    color: #006a6a;
+    font-size: 30px;
+    font-family: Montserrat;
+    font-weight: 700;
+    line-height: 100%;
+  }
+  .modal-content {
+    border-radius: 15px;
+    background: radial-gradient(
+        313.28% 209.98% at 99.43% 99.22%,
+        #dff 0%,
+        rgba(235, 247, 248, 0) 100%
+      ),
+      rgba(255, 255, 255, 0.75);
+    box-shadow: 0px 0px 25px 0px rgba(0, 129, 130, 0.15);
+    backdrop-filter: blur(6.5px);
+  }
+  
+  .modal-footer button {
+    background: #008182;
+    box-shadow: 0px 0px 7px 0px rgba(0, 129, 130, 0.16);
+    color: #fff;
+    width: 200px;
+    border: none;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 8px 10px;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+  }
+  
+  .modal-body {
+    color: #008182;
+    font-size: 16px;
+    font-family: Montserrat;
+    font-weight: 500;
+  }
+  .modal-body label {
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 2%;
+  }
+  .modal-footer button:hover {
+    background: #fff;
+    color: #008182;
+    border: 1px solid #008182;
+    transition: 1s;
+  }
+
   
   /* Adjustments for smaller screens */
   @media (max-width: 768px) {

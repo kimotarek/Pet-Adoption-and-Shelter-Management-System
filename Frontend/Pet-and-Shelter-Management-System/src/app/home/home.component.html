@@ -127,31 +127,100 @@
 
       <div class="discoverbox1">
         <div class="discoverinfo">
-          <div class="pet_description">
-            <h3><u>Information</u></h3>
-          </div>
           <ul>
             <li>Age: {{ pet.age }}</li>
             <li>Gender: {{ pet.gender }}</li>
             <li>species: {{ pet.species }}</li>
             <li>Breed: {{ pet.breed }}</li>
-            <li>Behavior: {{ pet.shelter_name }}</li>
+            <li>Shelter: {{ pet.shelter_name }}</li>
             <li>Health Status: {{ pet.health_status }}</li>
             <li>Behavior: {{ pet.behavior }}</li>
-            <!-- <li>Behavior: {{ pet.description }}</li> -->
           </ul>
-          <div class="pet_description">
-            <h3><u>description</u></h3>
-            {{ pet.description }}
+        </div>
+      </div>
+      <button
+        class="discoverbtns btn_details"
+        data-toggle="modal"
+        data-target="#pet_details"
+        (click)="select_pet(pet)"
+      >
+        More Details
+      </button>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="pet_details"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+        <button
+          type="button"
+          class="close close1"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="close_popup()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="name2">
+          <img
+            [src]="selected_pet.image"
+            class="image"
+            style="background-color: #008182"
+          />
+          <div class="name1" style="margin-top: 10px">
+            <h5 >{{ selected_pet.name }}</h5>
+            <h5  id="id">#{{ selected_pet.id }}</h5>
           </div>
         </div>
 
+        <div class="discoverbox1">
+          <div class="discoverinfo">
+            <div class="pet_description">
+              <h3><u>Information</u></h3>
+            </div>
+            <ul>
+              <li>Age: {{ selected_pet.age }}</li>
+              <li>Gender: {{ selected_pet.gender }}</li>
+              <li>species: {{ selected_pet.species }}</li>
+              <li>Breed: {{ selected_pet.breed }}</li>
+              <li>Shelter: {{ selected_pet.shelter_name }}</li>
+              <li>Health Status: {{ selected_pet.health_status }}</li>
+              <li>Behavior: {{ selected_pet.behavior }}</li>
+            </ul>
+            <div class="pet_description">
+              <h3><u>description</u></h3>
+              {{ selected_pet.description }}
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="pet_details" style="display: block !important;">
+            Adopt <i class="fa-solid fa-plus"></i>
+          </button>
+  
+          <button
+            (click)="close_popup()"
+            type="button"
+            id="pet_details"
+            style="background-color: #ff0052"
+          >
+            Cancel 
+          </button>
+        </div>
       </div>
-      <button
-      class="discoverbtns btn_details"
-    >
-     More Details
-    </button>
+ 
     </div>
   </div>
 </div>

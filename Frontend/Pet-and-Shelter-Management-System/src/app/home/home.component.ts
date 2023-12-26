@@ -3,6 +3,7 @@ import { users } from '../objects/users';
 import { ModalPopServiceService } from '../services/modal-pop-service-service.service';
 import { Router } from '@angular/router';
 import { Pets } from '../objects/pets';
+declare const $: any;
 
 @Component({
   selector: 'app-home',
@@ -16,6 +17,7 @@ export class HomeComponent {
   curruser = new users();
   isadmin: boolean = false;
   isLogin = false;
+  selected_pet:Pets=new Pets();
   petArray: Pets[] = [
     {
       age: "1 year",
@@ -155,6 +157,12 @@ export class HomeComponent {
   }
   open_Contact(){
 
+  }
+  select_pet(pet:Pets){
+    this.selected_pet=pet
+  }
+  close_popup() {
+    $('#pet_details').modal('hide');
   }
 
 }

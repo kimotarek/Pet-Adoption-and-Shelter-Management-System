@@ -6,6 +6,9 @@ import { HomeComponent } from './home/home.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { AddShelterComponent } from './add-shelter/add-shelter.component';
 import { AddStaffComponent } from './add-staff/add-staff.component';
+import { StaffHomeComponent } from './staff-home/staff-home.component';
+import { AddPetComponent } from './add-pet/add-pet.component';
+import { ShowApplicationComponent } from './show-application/show-application.component';
 
 const routes: Routes = [
   {
@@ -35,6 +38,23 @@ const routes: Routes = [
       {
         path: 'add_staff',
         component: AddStaffComponent,
+      },
+    ],
+  },
+  {
+    path: 'staff_home',
+    component: StaffHomeComponent,
+
+    // canActivate: [GuardServiceService],
+
+    children: [
+      {
+        path: 'add_pet',
+        component: AddPetComponent,
+      },
+      {
+        path: 'show_application',
+        component: ShowApplicationComponent,
       },
     ],
   },

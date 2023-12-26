@@ -39,9 +39,9 @@ export class AddShelterComponent {
 
 
   close_popup() {
-    $('#confirm_adress').modal('hide');
-    $('#editlocationmodal').modal('hide');
-    $('#addlocationmodal').modal('hide');
+    $('#confirm').modal('hide');
+    $('#edit').modal('hide');
+    $('#add').modal('hide');
   }
   close() {
     this.close_popup();
