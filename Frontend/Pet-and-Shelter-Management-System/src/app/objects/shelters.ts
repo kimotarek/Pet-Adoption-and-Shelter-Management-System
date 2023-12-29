@@ -1,7 +1,7 @@
 export class Shelter{
 
     id:any;
-    contact_info:any
+    contactInfo:any
     name:any;
     location:any;
 }

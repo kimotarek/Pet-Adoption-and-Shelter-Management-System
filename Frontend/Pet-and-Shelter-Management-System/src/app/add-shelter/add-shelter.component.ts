@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Shelter } from '../objects/shelters';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ShelterserviceService } from '../services/shelterService/shelterservice.service';
 declare const $: any;
 
 @Component({
@@ -11,19 +13,19 @@ export class AddShelterComponent {
   shelter: Shelter[] = [
     {
       id:"1",
-      contact_info:"01202743288",
+      contactInfo:"01202743288",
       location:"cairo",
       name:"pet care shelter"
     },
     {
       id:"2",
-      contact_info:"01202743288",
+      contactInfo:"01202743288",
       location:"Alexandria",
       name:"New shelter"
     },
     {
       id:"3",
-      contact_info:"01202743288",
+      contactInfo:"01202743288",
       location:"Aswan",
       name:"old shelter"
     }
@@ -32,7 +34,14 @@ export class AddShelterComponent {
   edit_ad = new Shelter();
   index_remved_shelter: any;
   index_edit_shelter: any;
-  constructor() {
+  constructor(private service:ShelterserviceService) {
+    
+    this.service.get_Shelter().subscribe((x) => {
+      console.log(x)
+      this.shelter=x;
+      error: (error: HttpErrorResponse) => alert(error.message);
+    });
+
   }
 
   ngOnInit(): void {}
@@ -62,10 +71,9 @@ export class AddShelterComponent {
     this.close_popup();
     this.remove_ad = new Shelter();
     this.index_remved_shelter = '';
-    // this.service.remove_locate(x._id).subscribe((x) => {
-    //   this.get_all_place();
-    //   error: (error: HttpErrorResponse) => alert(error.message);
-    // });
+    this.service.delete_Shelter(x.id).subscribe((x) => {
+      error: (error: HttpErrorResponse) => alert(error.message);
+    });
   }
   edit_address(value: any, index: any) {
     this.edit_ad = value;
@@ -75,17 +83,17 @@ export class AddShelterComponent {
   totaly_edit(ed_name:any, ed_location:any,ed_Contact:any){
     this.shelter[this.index_edit_shelter].name = ed_name;
     this.shelter[this.index_edit_shelter].location = ed_location;
-    this.shelter[this.index_edit_shelter].contact_info = ed_Contact;
+    this.shelter[this.index_edit_shelter].contactInfo = ed_Contact;
     this.close_popup();
 
-    // this.service
-    //   .edit_location(
-    //     this.address[this.index_edit_address]._id,
-    //     this.address[this.index_edit_address]
-    //   )
-    //   .subscribe((x) => {
-    //     error: (error: HttpErrorResponse) => alert(error.message);
-    //   });
+    this.service
+      .update_Shelter(
+        this.shelter[this.index_edit_shelter]
+      )
+      .subscribe((x) => {
+
+        error: (error: HttpErrorResponse) => alert(error.message);
+      });
     // service edit address
   }
 
@@ -97,17 +105,15 @@ export class AddShelterComponent {
     let x = new Shelter();
     x.name = shelter_name;
     x.location = Shelter_location;
-    x.contact_info = Shelter_contact;
+    x.contactInfo = Shelter_contact;
     this.shelter.push(x);
     this.close_popup();
     //serviec add new address and recieve id and set it
 
-    // this.service.add_location(x).subscribe((x) => {
-    //   this.address[this.address.length - 1]._id = x._id;
-
-    //   this.get_all_place();
-    //   error: (error: HttpErrorResponse) => alert(error.message);
-    // });
+    this.service.add_Shelter(x).subscribe((res) => {
+      this.shelter[this.shelter.length - 1].id = res;
+      error: (error: HttpErrorResponse) => alert(error.message);
+    });
   }
 
 }

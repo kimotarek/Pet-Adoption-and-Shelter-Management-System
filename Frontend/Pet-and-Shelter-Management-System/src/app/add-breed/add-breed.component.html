@@ -4,11 +4,11 @@
       data-target="#add"
       class="add"
     >
-      Add Shelter <i class="fa-solid fa-plus"></i>
+      Add Breed And Specie <i class="fa-solid fa-plus"></i>
     </button>
     <!-- ng for -->
     <div
-      *ngFor="let sh of shelter; let i = index"
+      *ngFor="let sh of speciebreed; let i = index"
       class="card card-body taken"
     >
       <div class="remove_edit">
@@ -30,34 +30,24 @@
       <table>
         <tr>
           <div class="card-text takenbox">
-            <td><label class="card-title">Shelter Name</label></td>
+            <td><label class="card-title">Breed</label></td>
             <td>
               <div class="takeninfo">
-                <label>{{ sh.name }}</label>
+                <label>{{ sh.breed }}</label>
               </div>
             </td>
           </div>
         </tr>
         <tr>
             <div class="card-text takenbox">
-              <td><label class="card-title">Shelter Location</label></td>
+              <td><label class="card-title">Specie </label></td>
               <td>
                 <div class="takeninfo">
-                  <label>{{ sh.location }}</label>
+                  <label>{{ sh.specie }}</label>
                 </div>
               </td>
             </div>
         </tr>
-        <tr>
-            <div class="card-text takenbox">
-              <td><label class="card-title">Contact Information</label></td>
-              <td>
-                <div class="takeninfo">
-                  <label>{{ sh.contactInfo }}</label>
-                </div>
-              </td>
-            </div>
-          </tr>
       </table>
     </div>
   </div>
@@ -88,34 +78,24 @@
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label for="exampleFormControlInput1">Shelter Name:</label>
+          <label for="exampleFormControlInput1">Breed:</label>
           <input
             type="text"
             class="form-control"
             id="exampleFormControlInput1"
             placeholder="Enter Name of Shelter"
-            #shelter_name
+            #Breed
           />
         </div>
 
         <div class="form-group">
-          <label for="exampleFormControlInput2">Shelter Location</label>
+          <label for="exampleFormControlInput2">Specie</label>
           <input
             type="text"
             class="form-control"
             id="exampleFormControlInput2"
             placeholder="Enter Location of Shelter"
-            #Shelter_location
-          />
-        </div>
-        <div class="form-group">
-          <label for="exampleFormControlInput3">Shelter Contact</label>
-          <input
-            type="text"
-            class="form-control"
-            id="exampleFormControlInput3"
-            placeholder="Enter Contact Info for Shelter"
-            #Shelter_contact
+            #Specie
           />
         </div>
       </div>
@@ -123,12 +103,11 @@
       <div class="modal-footer">
         <button
         (click)="
-            add_shelter(
-                shelter_name.value,
-                Shelter_location.value,
-                Shelter_contact.value
-            )
-        "
+                add_breedspecie(
+                    Breed.value,
+                    Specie.value
+                )
+            "
           type="button"
           id="addnewlocation"
         >
@@ -171,43 +150,35 @@
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label for="exampleFormControlInput4">Shelter Name</label>
+          <label for="exampleFormControlInput4">Breed</label>
           <input
-            [value]="edit_ad.name"
+            [value]="edit_ad.breed"
+            disabled
             type="text"
             class="form-control"
             id="exampleFormControlInput4"
-            #ed_name
+            #ed_Breed
           />
         </div>
         <div class="form-group">
-          <label for="exampleFormControlInput4">Shelte Location</label>
+          <label for="exampleFormControlInput4">Specie</label>
           <input
-            [value]="edit_ad.location"
+            [value]="edit_ad.specie"
             type="text"
             class="form-control"
             id="exampleFormControlInput4"
-            #ed_location
+            #ed_Specie
           />
         </div>
-        <div class="form-group">
-            <label for="exampleFormControlInput4">Shelte Contact</label>
-            <input
-              [value]="edit_ad.contactInfo"
-              type="text"
-              class="form-control"
-              id="exampleFormControlInput4"
-              #ed_Contact
-            />
-          </div>
+
       </div>
       <div class="modal-footer">
         <button
-          (click)="totaly_edit(ed_name.value, ed_location.value,ed_Contact.value)"
+          (click)="totaly_edit(ed_Specie.value)"
           type="button"
           id="addnewlocation"
         >
-          Edit Shelter <i class="fa-solid fa-plus"></i>
+          Edit Specie <i class="fa-solid fa-plus"></i>
         </button>
         <button
           (click)="close_popup()"
@@ -248,7 +219,7 @@
         </button>
       </div>
       <div class="modal-body" style="color: red">
-        Are you sure you want to remove Shelter of {{ remove_ad.location }}?
+        Are you sure you want to remove Breed {{ remove_ad.breed}}?
       </div>
       <div class="modal-footer">
         <button (click)="totaly_remove()" class="discoverbtns btn_exam">

@@ -14,6 +14,8 @@ import { AddStaffComponent } from './add-staff/add-staff.component';
 import { StaffHomeComponent } from './staff-home/staff-home.component';
 import { AddPetComponent } from './add-pet/add-pet.component';
 import { ShowApplicationComponent } from './show-application/show-application.component';
+import { HttpClientModule } from '@angular/common/http';
+import { AddBreedComponent } from './add-breed/add-breed.component';
 
 @NgModule({
   declarations: [
@@ -28,11 +30,15 @@ import { ShowApplicationComponent } from './show-application/show-application.co
     StaffHomeComponent,
     AddPetComponent,
     ShowApplicationComponent,
+    AddBreedComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

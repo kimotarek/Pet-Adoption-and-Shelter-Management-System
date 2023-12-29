@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Shelter } from '../objects/shelters';
 import { Pets } from '../objects/pets';
+import { PetServiceService } from '../services/petService/pet-service.service';
+import { HttpErrorResponse } from '@angular/common/http';
 declare const $: any;
 @Component({
   selector: 'app-add-pet',
@@ -10,19 +12,21 @@ declare const $: any;
 export class AddPetComponent {
   petArray: Pets[] = [
     {
-      age: '1 year',
+      age: '4',
       name: 'Hunter',
       species: 'Dog',
-      breed: 'German Shepherd',
-      id: '2',
-      gender: 'Male',
-      health_status: 'Good',
-      behavior: 'Intelligence and Trainability',
+      breed: 'Arabian Red',
+      id: '4',
+      gender: '1',
+      healthStatus: 'Good',
+      behaviour: 'Intelligence and Trainability',
       description:
         'Appearance: German Shepherds are medium to large-sized dogs with a well-balanced and muscular build. They have a distinct double coat, which is usually dense and straight. The outer coat can be short or medium in length, and the undercoat is thick. Color: The most common color for German Shepherds is the black and tan saddle pattern, but they can also be solid black or sable. White or cream colors are considered faults in the breed standard.',
       image: '../../assets/images/dog2.jpg',
       shelter_name: 'old Shelter',
-      Shelter_id: '106',
+      idOfShelter: '1',
+      vaccination:1,
+      neutering:1,
     },
     {
       age: '30 days',
@@ -31,28 +35,32 @@ export class AddPetComponent {
       breed: 'Siamese',
       id: '3',
       gender: 'Female',
-      health_status: 'Excellent',
-      behavior: 'Playful and Affectionate',
+      healthStatus: 'Excellent',
+      behaviour: 'Playful and Affectionate',
       description:
         'Appearance: Siamese cats are known for their sleek, slender bodies and striking blue almond-shaped eyes. They have short fur with color points on their ears, face, paws, and tail. Coat color can vary and includes seal, chocolate, blue, and lilac.',
       image: '../../assets/images/cat.jpeg',
       shelter_name: 'Pet Care Shelter',
-      Shelter_id: '105',
+      idOfShelter: '105',
+      vaccination:1,
+      neutering:1,
     },
     {
       age: '8 months',
       name: 'Rocky',
       species: 'Dog',
       breed: 'Labrador Retriever',
-      id: '4',
+      id: '1',
       gender: 'Male',
-      health_status: 'Very Good',
-      behavior: 'Friendly and Energetic',
+      healthStatus: 'Very Good',
+      behaviour: 'Friendly and Energetic',
       description:
         'Appearance: Labrador Retrievers are medium to large-sized dogs with a strong build. They have a short, dense water-resistant coat. Coat colors include yellow, black, and chocolate. Labrador Retrievers have a broad head, expressive eyes, and a distinctive otter tail.',
       image: '../../assets/images/dog.jpeg',
       shelter_name: 'New Shelter',
-      Shelter_id: '104',
+      idOfShelter: '104',
+      vaccination:1,
+      neutering:1,
     },
     {
       age: '1 Year and 3 Months',
@@ -61,13 +69,15 @@ export class AddPetComponent {
       breed: 'Persian',
       id: '5',
       gender: 'Male',
-      health_status: 'Fair',
-      behavior: 'Calm and Independent',
+      healthStatus: 'Fair',
+      behaviour: 'Calm and Independent',
       description:
         'Appearance: Persian cats are known for their long, luxurious coats and flat faces. They have large, expressive eyes and a distinctive round head. Coat colors can vary widely, and their grooming needs are extensive.',
       image: '../../assets/images/cat2.jpeg',
       shelter_name: 'old Shelter',
-      Shelter_id: '103',
+      idOfShelter: '103',
+      vaccination:1,
+      neutering:1,
     },
     {
       age: '2 Years',
@@ -76,13 +86,15 @@ export class AddPetComponent {
       breed: 'Siberian Husky',
       id: '1',
       gender: 'Female',
-      health_status: 'Excellent',
-      behavior: 'Playful and Independent',
+      healthStatus: 'Excellent',
+      behaviour: 'Playful and Independent',
       description:
         'Appearance: Siberian Huskies are medium-sized working dogs with a thick double coat. They have erect triangular ears, distinctive markings, and striking blue or multicolored eyes. Siberian Huskies are known for their wolf-like appearance.',
       image: '../../assets/images/dog1.jpeg',
       shelter_name: 'Pet Care Shelter',
-      Shelter_id: '102',
+      idOfShelter: '102',
+      vaccination:1,
+      neutering:1,
     },
     {
       age: '1 Year',
@@ -91,13 +103,15 @@ export class AddPetComponent {
       breed: 'Holland Lop',
       id: '6',
       gender: 'Male',
-      health_status: 'Good',
-      behavior: 'Gentle and Curious',
+      healthStatus: 'Good',
+      behaviour: 'Gentle and Curious',
       description:
         'Appearance: Holland Lop rabbits are small with a distinctive lop ear (drooping ear) appearance. They have a compact, muscular body and a dense, soft coat. Coat colors can vary, and they often have a friendly and docile nature.',
       image: '../../assets/images/rabbit.jpeg',
       shelter_name: 'old Shelter',
-      Shelter_id: '101',
+      idOfShelter: '101',
+      vaccination:1,
+      neutering:1,
     },
   ];
   remove_ad: Pets = new Pets();
@@ -105,9 +119,11 @@ export class AddPetComponent {
   index_remved_pet: any;
   index_edit_pet: any;
   pet_photo: any;
-  constructor() {}
+  constructor(private service: PetServiceService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // Your code here
+  }
 
   close_popup() {
     $('#confirm').modal('hide');
@@ -133,10 +149,9 @@ export class AddPetComponent {
     this.close_popup();
     this.remove_ad = new Pets();
     this.index_remved_pet = '';
-    // this.service.remove_locate(x._id).subscribe((x) => {
-    //   this.get_all_place();
-    //   error: (error: HttpErrorResponse) => alert(error.message);
-    // });
+    this.service.delete_pet(x.id).subscribe((x) => {
+      error: (error: HttpErrorResponse) => alert(error.message);
+    });
   }
   edit(value: any, index: any) {
     this.edit_ad = value;
@@ -156,55 +171,55 @@ export class AddPetComponent {
     this.edit_ad.name = ed_pet_name;
     this.edit_ad.age = ed_pet_age;
     this.edit_ad.gender = ed_pet_Gender;
-    this.edit_ad.behavior = ed_pet_behavior;
+    this.edit_ad.behaviour = ed_pet_behavior;
     this.edit_ad.breed = ed_pet_Breed;
     this.edit_ad.species = ed_pet_species;
     this.edit_ad.description = ed_pet_Description;
-    this.edit_ad.health_status = ed_pet_Health;
+    this.edit_ad.healthStatus = ed_pet_Health;
     this.petArray[this.index_edit_pet] = this.edit_ad;
     this.close_popup();
+    console.log(this.edit_ad)
 
-    // this.service
-    //   .edit_location(
-    //     this.address[this.index_edit_address]._id,
-    //     this.address[this.index_edit_address]
-    //   )
-    //   .subscribe((x) => {
-    //     error: (error: HttpErrorResponse) => alert(error.message);
-    //   });
+    this.service
+      .update_pet(
+        this.petArray[this.index_edit_pet]
+      )
+      .subscribe((x) => {
+        error: (error: HttpErrorResponse) => alert(error.message);
+      });
     // service edit address
   }
-
   add_pet(
     pet_name: any,
     pet_age: any,
     pet_species: any,
     pet_breed: any,
-    pet_gender: any,
     pet_health: any,
     pet_description: any,
-    pet_behavior: any
+    pet_behavior: any,
+    pet_gender: any,
+
   ) {
     let x = new Pets();
     x.name = pet_name;
     x.age = pet_age;
     x.gender = pet_gender;
-    x.behavior = pet_behavior;
+    x.behaviour = pet_behavior;
     x.breed = pet_breed;
     x.species = pet_species;
     x.description = pet_description;
-    x.health_status = pet_health;
+    x.healthStatus = pet_health;
     x.image = this.pet_photo;
+    x.idOfShelter = 1
+    x.neutering=0
+    x.vaccination=1
     this.petArray.push(x);
     this.close_popup();
     //serviec add new address and recieve id and set it
-
-    // this.service.add_location(x).subscribe((x) => {
-    //   this.address[this.address.length - 1]._id = x._id;
-
-    //   this.get_all_place();
-    //   error: (error: HttpErrorResponse) => alert(error.message);
-    // });
+    this.service.add_pet(x).subscribe((res) => {
+      this.petArray[this.petArray.length - 1].id = res;
+      error: (error: HttpErrorResponse) => alert(error.message);
+    });
   }
 
   onPhotoselect(event: any): void {

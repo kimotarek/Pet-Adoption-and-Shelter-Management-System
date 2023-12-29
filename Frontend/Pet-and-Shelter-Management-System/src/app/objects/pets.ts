@@ -6,12 +6,14 @@ export class Pets{
     species:any;
     age:any;
     gender:any;
-    health_status:any;
-    behavior:any;
+    healthStatus:any;
+    behaviour:any;
     description:any
     image:any;
     shelter_name:any;
-    Shelter_id:any;
+    idOfShelter:any;
+    neutering:any;
+    vaccination:any;
 
   }
   

@@ -9,6 +9,7 @@ import { AddStaffComponent } from './add-staff/add-staff.component';
 import { StaffHomeComponent } from './staff-home/staff-home.component';
 import { AddPetComponent } from './add-pet/add-pet.component';
 import { ShowApplicationComponent } from './show-application/show-application.component';
+import { AddBreedComponent } from './add-breed/add-breed.component';
 
 const routes: Routes = [
   {
@@ -56,6 +57,11 @@ const routes: Routes = [
         path: 'show_application',
         component: ShowApplicationComponent,
       },
+      {
+        path:'addBreed',
+        component: AddBreedComponent,
+
+      }
     ],
   },
 ];

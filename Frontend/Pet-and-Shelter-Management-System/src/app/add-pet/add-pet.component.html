@@ -40,8 +40,8 @@
       <li>Gender: {{ pet.gender }}</li>
       <li>species: {{ pet.species }}</li>
       <li>Breed: {{ pet.breed }}</li>
-      <li>Health Status: {{ pet.health_status }}</li>
-      <li>Behavior: {{ pet.behavior }}</li>
+      <li>Health Status: {{ pet.healthStatus }}</li>
+      <li>Behavior: {{ pet.behaviour }}</li>
     </ul>
     <div class="pet_description">
       <h3><u>description</u></h3>
@@ -282,7 +282,7 @@
           <div class="form-group">
             <label for="exampleFormControlInput3">pet Health Status</label>
             <input
-            [value]="edit_ad.health_status"
+            [value]="edit_ad.healthStatus"
 
               type="text"
               class="form-control"
@@ -294,7 +294,7 @@
           <div class="form-group">
             <label for="exampleFormControlInput3">pet behavior</label>
             <input
-             [value]="edit_ad.behavior"
+             [value]="edit_ad.behaviour"
               type="text"
               class="form-control"
               id="exampleFormControlInput3"
