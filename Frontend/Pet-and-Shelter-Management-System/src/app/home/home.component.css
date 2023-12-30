@@ -352,6 +352,11 @@ div {
     margin-top: 1rem;
     margin-left: 2.1rem;
   }
+  .btn_details:hover{
+    background-color: white;
+    color: #F79051;
+    transition: 1ms;
+  }
   .modal-title {
     color: #006a6a;
     font-size: 30px;

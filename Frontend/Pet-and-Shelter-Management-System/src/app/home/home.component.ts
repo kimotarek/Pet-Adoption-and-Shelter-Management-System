@@ -3,6 +3,7 @@ import { users } from '../objects/users';
 import { ModalPopServiceService } from '../services/modal-pop-service-service.service';
 import { Router } from '@angular/router';
 import { Pets } from '../objects/pets';
+import { PetServiceService } from '../services/petService/pet-service.service';
 declare const $: any;
 
 @Component({
@@ -131,16 +132,18 @@ export class HomeComponent {
   constructor(
     private popup: ModalPopServiceService,
     private route: Router,
+    private service: PetServiceService
   ) {
-    // if (this.service.isLoggedIn()) {
-    //   this.isLogin = true
-    //   // this.user = this.service.getUser()
-    // }
-    // else {
-    //   this.isLogin = false
-    //   // this.user = this.service.getUser()
-    // }
 
+
+    this.service.get_all().subscribe((x) => {
+      console.log(x);
+
+      for(let i=0 ; i<x.length; i++){
+        x[i].image = `data:image/jpeg;base64,${x[i].image}`;
+      }
+      this.petArray=x;
+    });
 
   }
 

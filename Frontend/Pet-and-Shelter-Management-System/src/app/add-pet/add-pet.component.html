@@ -9,11 +9,7 @@
     style="color: #006666"
   >
     <div class="remove_edit">
-      <button
-        data-toggle="modal"
-        data-target="#edit"
-        (click)="edit(pet, i)"
-      >
+      <button data-toggle="modal" data-target="#edit" (click)="edit(pet, i)">
         <i class="fa-solid fa-pen"></i>
       </button>
       <button
@@ -38,10 +34,11 @@
     <ul>
       <li>Age: {{ pet.age }}</li>
       <li>Gender: {{ pet.gender }}</li>
-      <li>species: {{ pet.species }}</li>
       <li>Breed: {{ pet.breed }}</li>
       <li>Health Status: {{ pet.healthStatus }}</li>
       <li>Behavior: {{ pet.behaviour }}</li>
+      <li>Vaccination: {{ pet.vaccination=='0'?"Yes":'No'}}</li>
+      <li>Neutering: {{ pet.neutering=='0'?"Yes":'No' }}</li>
     </ul>
     <div class="pet_description">
       <h3><u>description</u></h3>
@@ -93,35 +90,55 @@
             #pet_age
           />
         </div>
+
         <div class="form-group">
-          <label for="exampleFormControlInput3">pet Gender</label>
-          <input
-            type="text"
+          <label for="Gender Of Pet">Gender Of Pet</label>
+          <select
             class="form-control"
-            id="exampleFormControlInput3"
-            placeholder="Enter Gender of pet"
-            #pet_Gender
-          />
+            id="petVaccinationSelect"
+            [(ngModel)]="petGender"
+            name="petVaccination"
+          >
+            <option [value]="true">Male</option>
+            <option [value]="false">Female</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="petNeuteringSelect">Pet Neutering</label>
+          <select
+            class="form-control"
+            id="petNeuteringSelect"
+            [(ngModel)]="selectedNeutering"
+            name="petNeutering"
+          >
+            <option [value]="true">True</option>
+            <option [value]="false">False</option>
+          </select>
         </div>
         <div class="form-group">
-          <label for="exampleFormControlInput3">pet Species</label>
-          <input
-            type="text"
+          <label for="petVaccinationSelect">Pet Vaccination</label>
+          <select
             class="form-control"
-            id="exampleFormControlInput3"
-            placeholder="Enter species of pet"
-            #pet_species
-          />
+            id="petVaccinationSelect"
+            [(ngModel)]="selectedVaccination"
+            name="petVaccination"
+          >
+            <option [value]="true">True</option>
+            <option [value]="false">False</option>
+          </select>
         </div>
         <div class="form-group">
-          <label for="exampleFormControlInput3">pet Breed</label>
-          <input
-            type="text"
+          <label for="petBreedSelect">Select Pet Breed</label>
+          <select
             class="form-control"
-            id="exampleFormControlInput3"
-            placeholder="Enter breed of pet"
-            #pet_Breed
-          />
+            id="petBreedSelect"
+            [(ngModel)]="selectedBreed"
+            name="petBreed"
+          >
+            <option disabled>Select</option>
+            <option *ngFor="let b of breed" [ngValue]="b">{{ b.breed }}</option>
+          </select>
         </div>
         <div class="form-group">
           <label for="exampleFormControlInput3">pet Health Status</label>
@@ -163,7 +180,18 @@
             name="photo"
             accept="image/*"
             capture="camera"
-            (change)="onPhotoselect($event)"
+            (change)="onPhotoselectimage($event)"
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput3" style="display: block"
+            >pet Medical Record</label
+          >
+          <input
+            type="file"
+            id="photo"
+            name="photo"
+            (change)="onPhotoselectmedical($event)"
           />
         </div>
       </div>
@@ -174,12 +202,9 @@
             add_pet(
               pet_name.value,
               pet_age.value,
-              pet_species.value,
-              pet_Breed.value,
               pet_Health.value,
               pet_Description.value,
-              pet_behavior.value,
-              pet_Gender.value
+              pet_behavior.value
             )
           "
           type="button"
@@ -224,113 +249,83 @@
       </div>
       <div class="modal-body">
         <div class="form-group">
-            <label for="exampleFormControlInput1">Pet Name:</label>
-            <input
-              type="text"
-              [value]="edit_ad.name"
-              class="form-control"
-              id="exampleFormControlInput1"
-              placeholder="Enter Name of Pet"
-              #ed_pet_name
-            />
-          </div>
-          <div class="form-group">
-            <label for="exampleFormControlInput2">Pet Age</label>
-            <input
+          <label for="exampleFormControlInput1">Pet Name:</label>
+          <input
+            type="text"
+            [value]="edit_ad.name"
+            class="form-control"
+            id="exampleFormControlInput1"
+            placeholder="Enter Name of Pet"
+            #ed_pet_name
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput2">Pet Age</label>
+          <input
             [value]="edit_ad.age"
-              type="text"
-              class="form-control"
-              id="exampleFormControlInput2"
-              placeholder="Enter Age of Pet"
-              #ed_pet_age
-            />
-          </div>
-          <div class="form-group">
-            <label for="exampleFormControlInput3">pet Gender</label>
-            <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput2"
+            placeholder="Enter Age of Pet"
+            #ed_pet_age
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput3">pet Gender</label>
+          <input
             [value]="edit_ad.gender"
-              type="text"
-              class="form-control"
-              id="exampleFormControlInput3"
-              placeholder="Enter Gender of pet"
-              #ed_pet_Gender
-            />
-          </div>
-          <div class="form-group">
-            <label for="exampleFormControlInput3">pet Species</label>
-            <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput3"
+            placeholder="Enter Gender of pet"
+            #ed_pet_Gender
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput3">pet Species</label>
+          <input
             [value]="edit_ad.species"
-              type="text"
-              class="form-control"
-              id="exampleFormControlInput3"
-              placeholder="Enter species of pet"
-              #ed_pet_species
-            />
-          </div>
-          <div class="form-group">
-            <label for="exampleFormControlInput3">pet Breed</label>
-            <input
-            [value]="edit_ad.breed"
-
-              type="text"
-              class="form-control"
-              id="exampleFormControlInput3"
-              placeholder="Enter breed of pet"
-              #ed_pet_Breed
-            />
-          </div>
-          <div class="form-group">
-            <label for="exampleFormControlInput3">pet Health Status</label>
-            <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput3"
+            placeholder="Enter species of pet"
+            #ed_pet_species
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput3">pet Health Status</label>
+          <input
             [value]="edit_ad.healthStatus"
-
-              type="text"
-              class="form-control"
-              id="exampleFormControlInput3"
-              placeholder="Enter Health Status of pet"
-              #ed_pet_Health
-            />
-          </div>
-          <div class="form-group">
-            <label for="exampleFormControlInput3">pet behavior</label>
-            <input
-             [value]="edit_ad.behaviour"
-              type="text"
-              class="form-control"
-              id="exampleFormControlInput3"
-              placeholder="Enter behavior of pet"
-              #ed_pet_behavior
-            />
-          </div>
-          <div class="form-group">
-            <label for="exampleFormControlInput3">pet Description</label>
-            <textarea
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput3"
+            placeholder="Enter Health Status of pet"
+            #ed_pet_Health
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput3">pet Description</label>
+          <textarea
             [value]="edit_ad.description"
-              type="text"
-              class="form-control"
-              id="exampleFormControlInput3"
-              placeholder="Enter Description of pet"
-              #ed_pet_Description
-            ></textarea>
-          </div>
-          <div class="form-group">
-            <label for="exampleFormControlInput3" style="display: block"
-              >pet Photo</label
-            >
-            <input
-              type="file"
-              id="photo"
-              name="photo"
-              accept="image/*"
-              capture="camera"
-              (change)="onPhotoselect($event)"
-            />
-          </div>
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput3"
+            placeholder="Enter Description of pet"
+            #ed_pet_Description
+          ></textarea>
+        </div>
       </div>
       <div class="modal-footer">
         <button
           (click)="
-            totaly_edit(ed_pet_name.value,ed_pet_age.value,ed_pet_Gender.value,ed_pet_behavior.value,ed_pet_Breed.value,ed_pet_Health.value,ed_pet_species.value,ed_pet_Description.value)
+            totaly_edit(
+              ed_pet_name.value,
+              ed_pet_age.value,
+              ed_pet_Gender.value,
+              ed_pet_Description.value,
+              ed_pet_Health.value,
+              ed_pet_Description.value
+            )
           "
           type="button"
           id="edit"

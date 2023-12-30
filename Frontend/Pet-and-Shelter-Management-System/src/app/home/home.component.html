@@ -130,11 +130,11 @@
           <ul>
             <li>Age: {{ pet.age }}</li>
             <li>Gender: {{ pet.gender }}</li>
-            <li>species: {{ pet.species }}</li>
             <li>Breed: {{ pet.breed }}</li>
-            <li>Shelter: {{ pet.shelter_name }}</li>
             <li>Health Status: {{ pet.healthStatus }}</li>
             <li>Behavior: {{ pet.behaviour }}</li>
+            <li>Vaccination: {{ pet.vaccination=='0'?"Yes":'No'}}</li>
+            <li>Neutering: {{ pet.neutering=='0'?"Yes":'No' }}</li>
           </ul>
         </div>
       </div>
