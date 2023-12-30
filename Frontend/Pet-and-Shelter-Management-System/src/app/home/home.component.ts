@@ -132,10 +132,22 @@ export class HomeComponent {
   constructor(
     private popup: ModalPopServiceService,
     private route: Router,
-    private service: PetServiceService
+    private service: PetServiceService,
+   
   ) {
 
 
+    console.log(localStorage.getItem('userName'))
+    if(localStorage.getItem('userName')==null){
+      this.isLogin=false;
+    }else{
+      this.isLogin=true;
+      this.curruser.first_name=localStorage.getItem('userName');
+    }
+
+    
+
+   console.log(service)
     this.service.get_all().subscribe((x) => {
       console.log(x);
 
@@ -149,11 +161,9 @@ export class HomeComponent {
 
   toggleUserSidebar() {
     this.isUserSidebarOpen = !this.isUserSidebarOpen;
-    if (this.curruser != null) {
-      if (this.curruser.role[0] == "admin" || this.curruser.role[0] == "MANAGER" || this.curruser.role[0] == "EMPLOYEE") {
+      if (localStorage.getItem("role")=="MANGER"||localStorage.getItem("role")=="STAFF") {
         this.isadmin = true;
       }
-    }
   }
   closeUserSidebar() {
     this.isUserSidebarOpen = false;
@@ -165,10 +175,10 @@ export class HomeComponent {
     this.route.navigate(['/signup']);
   }
   goTouserPage() {
-    this.route.navigate(['/userpage'])
+    this.route.navigate(['/user_home'])
   }
   goToadminPage() {
-    this.route.navigate(['/adminpage/about'])
+    this.route.navigate(['/'])
   }
  
   open_about() {
@@ -176,7 +186,11 @@ export class HomeComponent {
   }
 
   logout(): void {
-   
+    localStorage.removeItem("token");
+    localStorage.removeItem("userName")
+    localStorage.removeItem("role")
+
+    this.route.navigate(['']);
   }
   open_Contact(){
 

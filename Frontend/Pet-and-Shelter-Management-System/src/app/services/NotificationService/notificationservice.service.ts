@@ -13,12 +13,14 @@ export class NotificationserviceService {
 
 
   constructor(private http: HttpClient) { }
-
+  public headers = {
+    Authorization: `Bearer ${localStorage.getItem('token')}`,
+  };
 
 
   public get_notification():Observable<any>{
     let userName ="ibrahim"
-    return this.http.get<any>(`${this.apiServerUrl}/get_notification/${userName}`, { withCredentials: true });
+    return this.http.get<any>(`${this.apiServerUrl}/get_notification/${userName}`, { headers: this.headers, withCredentials: true });
   }
 
 }

@@ -1,4 +1,4 @@
-div {
+/* div {
     font-family: "Montserrat", sans-serif;
   }
   .container {
@@ -33,14 +33,6 @@ div {
     order: 1;
   }
   
-  /* .logo {
-    display: flex;
-    width: 141px;
-    padding: 0px 0px 0.013px 0px;
-    gap: 7.768px;
-    margin-top: 5%;
-    order: 3;
-  } */
   h3 {
     color: #090914;
     font-size: 24px;
@@ -138,4 +130,44 @@ div {
     }
   }
   
+   */
+   .signup-form {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
   
+  label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  input,
+  select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+  }
+  
+  button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  .radio-buttons {
+    display: flex;
+  }
+  
+  .radio-buttons label {
+    margin-right: 10px;
+  }

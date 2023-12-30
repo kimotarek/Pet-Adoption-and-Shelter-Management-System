@@ -1,9 +1,11 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { users } from '../objects/users';
 // import { ServicService } from '../services/servic.service';
+import {RegisterService} from '../services/registerService';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ModalPopServiceService } from '../services/modal-pop-service-service.service';
+import { ShelterserviceService } from '../services/shelterService/shelterservice.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -24,15 +26,24 @@ export class SignUpComponent implements OnInit {
    "old Shelter"
   ];
 
+  selectedRole: string= '';
+  formData: any = {};
+  shelterArray: any[] = []
 
 
   constructor(
     // user: users,
-    // private service: ServicService,
+    private service: RegisterService,
     private router: Router,
-    private pop_service: ModalPopServiceService
+    private pop_service: ModalPopServiceService,
+    private serviceshelter: ShelterserviceService
   ) {
     // this.signup_user = user;
+    this.serviceshelter.get_Shelter().subscribe((x) => {
+      this.shelterArray=x;
+      error: (error: HttpErrorResponse) => alert(error.message);
+    });
+    
   }
 
   ngOnInit(): void {}
@@ -91,4 +102,50 @@ export class SignUpComponent implements OnInit {
     //   error: (error: HttpErrorResponse) => alert(error.message);
     // });
   }
+  submitForm() {
+  
+    this.formData.roleInSystem = this.selectedRole;
+    if(!this.isFormValid()){
+      alert('Please fill all the required fields');
+      return;
+    }
+    this.service.signup(this.formData).subscribe((x:any) => {
+      console.log(x);
+      if(x !=null){
+        localStorage.setItem('token', x.token);
+        localStorage.setItem('userName',this.formData.userName);
+        localStorage.setItem('role',this.selectedRole);
+
+        if(this.selectedRole == 'ADOPTER'){
+          this.router.navigate(['/home']);
+        }
+        else if(this.selectedRole == 'MANGER'){
+          this.router.navigate(['/admin_home/add_shelter']);
+        }
+        else if(this.selectedRole == 'STAFF'){
+          this.router.navigate(['/staff_home/add_pet']);
+
+        }
+      }
+      else 
+        alert('Already SignedUp');
+    });
+    // Add your logic here to send the form data to the server or perform other actions.
+  }
+  isFormValid(): boolean {
+    // Check if all required fields are filled based on your form structure
+    return (
+      this.formData.firstName &&
+      this.formData.lastName &&
+      this.formData.contactInfo &&
+      this.formData.password &&
+      this.formData.userName &&
+      this.formData.roleInSystem&&
+      ((this.selectedRole !== 'staff') ||
+        (this.selectedRole === 'staff' &&
+          this.formData.role &&
+          this.formData.idOfShelter))
+    );
+  }
+
 }

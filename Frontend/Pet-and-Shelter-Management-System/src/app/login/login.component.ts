@@ -1,10 +1,12 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, Inject, OnInit } from '@angular/core';
-// import { ServicService } from '../services/servic.service';
+import { RegisterService } from '../services/registerService';
 import { HttpErrorResponse } from '@angular/common/http';
+import { of } from 'rxjs';
 import { DOCUMENT } from '@angular/common';
 import { ModalPopServiceService } from '../services/modal-pop-service-service.service';
 import { users } from '../objects/users';
+import { catchError } from 'rxjs/internal/operators/catchError';
 declare const $: any;
 
 @Component({
@@ -16,13 +18,15 @@ export class LoginComponent implements OnInit {
   user_login: any=new users();
   power = -1;
   pop_up: any;
+  selectedOption:any = ''
+  formData: any = {};
   flag_show_login = false;
   flag_btn_login = true;
   signature: String = '';
   code: any;
   constructor(
     // user: users,
-    // private service: ServicService,
+    private service: RegisterService,
     private router: Router,
     private pop_service: ModalPopServiceService,
     private route: ActivatedRoute
@@ -44,23 +48,48 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {}
 
-  submit() {
+  onSubmit() {
     //  service with user_login
     this.flag_btn_login = false;
-    // this.service.login(this.user_login).subscribe((x) => {
-    //   if (x.success == 2) {
-    //     this.router.navigate(['/admin_home/admin_location']);
-    //   } else if (x.success == 1) {
-    //     this.router.navigate(['/home/home_bar']);
-    //   } else {
-    //     this.pop_service.open_error_login();
-    //     this.flag_btn_login = true;
-    //   }
-
-    //   error: (error: HttpErrorResponse) => {
-    //     alert(error.message);
-    //   };
-    // });
+    if (this.formData.role !== '' && this.formData.role != null && this.formData.userName && this.formData.password) {
+      console.log(this.formData);
+      this.service.login(this.formData).pipe(
+        catchError((error) => {
+          if (error.status === 403) {
+            // Handle 403 Forbidden error here
+            console.log('Access Forbidden!');
+            alert('user not found, check that you are choosing the right role or sign up first')
+          } else {
+            // Handle other HTTP errors
+            console.error('HTTP Error:', error.status);
+          }
+    
+          // Rethrow the error to propagate it further if needed
+          return of(null); // or throw error; depending on your use case
+        })
+      ).subscribe((response:any) => {
+        
+        if (response) {
+          // Handle successful response
+          localStorage.setItem('token', response.token);
+          localStorage.setItem('userName', this.formData.userName);
+          localStorage.setItem('role',this.formData.role);
+          if(this.formData.role == 'ADOPTER'){
+            this.router.navigate(['/home']);
+          }
+          else if(this.formData.role == 'MANGER'){
+            this.router.navigate(['/admin_home/add_shelter']);
+          }
+          else if(this.formData.role == 'STAFF'){
+            this.router.navigate(['/staff_home/add_pet']);
+  
+          }
+        }
+        else{
+            alert('user not found, check that you are choosing the right role or sign up first')
+        }
+      });
+    }
   }
 
   forget_pass_first_step(email: any) {
@@ -109,7 +138,5 @@ export class LoginComponent implements OnInit {
     $('#forget_pass_send_email').modal('hide');
     $('#verify_email_to_change').modal('hide');
     $('#change_pass').modal('hide');
-
-
   }
 }

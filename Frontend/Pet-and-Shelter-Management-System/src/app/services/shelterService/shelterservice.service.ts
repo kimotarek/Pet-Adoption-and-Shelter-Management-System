@@ -14,16 +14,19 @@ export class ShelterserviceService {
 
   constructor(private http: HttpClient) { }
 
+  public headers = {
+    Authorization: `Bearer ${localStorage.getItem('token')}`,
+  };
 
 
   public add_Shelter(Shelter:Shelter):Observable<any>{
-    return this.http.post<any>(`${this.apiServerUrl}/addShelter`,Shelter, { withCredentials: true });
+    return this.http.post<any>(`${this.apiServerUrl}/addShelter`,Shelter, { headers: this.headers, withCredentials: true });
   }
   public update_Shelter(Shelter:Shelter):Observable<any>{
-    return this.http.post<any>(`${this.apiServerUrl}/updateShelter`,Shelter, { withCredentials: true });
+    return this.http.post<any>(`${this.apiServerUrl}/updateShelter`,Shelter, {  headers: this.headers,withCredentials: true });
   }
   public delete_Shelter(shelter_id:any):Observable<any>{
-    return this.http.post<any>(`${this.apiServerUrl}/deleteShelter/${shelter_id}`, { withCredentials: true });
+    return this.http.post<any>(`${this.apiServerUrl}/deleteShelter/${shelter_id}`, { headers: this.headers, withCredentials: true });
   }
   public get_Shelter():Observable<any>{
     return this.http.get<any>(`${this.apiServerUrl}/getShelter`, { withCredentials: true });

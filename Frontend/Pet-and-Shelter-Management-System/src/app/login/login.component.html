@@ -1,218 +1,25 @@
-<div class="container" *ngIf="flag_show_login == true">
-    <div class="image"></div>
-  
-    <div class="form">  
-      <form class="box" #input_form="ngForm" (ngSubmit)="submit()">
-        <h3 style="margin-bottom: 2rem;">Sign in to Pet Adoption System</h3>
-        <div class="field">
-          <label for="email">Email or phone number</label>
-          <input
-            type="text"
-            id="email"
-            name="email"
-            placeholder="Email / Phone number"
-            [(ngModel)]="user_login.email"
-            #email="ngModel"
-            required
-            class="form-control"
-            [class.is-invalid]="email.invalid && email.touched"
-            email
-            phone="CN"
-          />
-          <!-- handle errors -->
-          <div *ngIf="email.invalid && email.touched" class="error">
-            <div *ngIf="email.errors?.['email']&&(email.errors?.['phone'])">
-              Email Or Phone Is Required
-            </div>
-            <div *ngIf="email.errors?.['required']">This Field Is Required</div>
-          </div>
-        </div>
-        <div class="field">
+<!-- login.component.html -->
+<div class="form-container">
+  <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+          <label for="userName">User Name</label>
+          <input type="text" id="userName" name="userName" [(ngModel)]="formData.userName" required>
+      </div>
+      <div class="form-group">
           <label for="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Password"
-            [(ngModel)]="user_login.password"
-            #password="ngModel"
-            required
-            class="form-control"
-            [class.is-invalid]="password.invalid && password.touched"
-            minlength="8"
-          />
-        </div>
-        <!-- handle errors -->
-        <div *ngIf="password.invalid && password.touched" class="error">
-          <div *ngIf="password.errors?.['required']">This Field Is Required</div>
-          <div *ngIf="password.errors?.['minlength']">Min Length is 8</div>
-        </div>
-  
-        <!-- not_active -->
-        <button
-          class="field"
-          [disabled]="email.errors?.['required']||(email.errors?.['email']&&(email.errors?.['phone']))||password.errors?.['required']||password.errors?.['minlength']"
-          *ngIf="email.errors?.['required']
-        ||password.errors?.['required']||password.errors?.['minlength']||(email.errors?.['email']&&(email.errors?.['phone']))"
-          style="background-color: gray"
-          id="btn"
-          type="submit"
-        >
-          Sign in
-        </button>
-  
-        <!-- active -->
-        <button
-          [disabled]="flag_btn_login == false"
-          class="field"
-          [hidden]="(email.errors?.['required']||password.errors?.['required'])
-        ||(email.errors?.['email']&&(email.errors?.['phone']))||password.errors?.['minlength']"
-          id="btn"
-          type="submit"
-        >
-          Sign in
-          <div
-            *ngIf="flag_btn_login == false"
-            class="spinner-border text-light"
-            role="status"
-          ></div>
-        </button>
-  
-        <label id="signup"
-          >Not a member?
-          <a routerLink="/signup">Sign up now</a>
-        </label>
-        <label
-          data-toggle="modal"
-          data-target="#forget_pass_send_email"
-          id="forget"
-        >
-          <span><u>Forget Password?</u></span>
-        </label>
-      </form>
-    </div>
-  </div>
-  
-  <div
-    class="modal fade"
-    id="forget_pass_send_email"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="exampleModalCenterTitle"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Forget password</h5>
-          <button class="outer_button" disabled>
-            <button
-              type="button"
-              class="close close1"
-              data-dismiss="modal"
-              aria-label="Close"
-              (click)="close_popup()"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </button>
-        </div>
-        <div class="modal-body">
-          <h2>Enter Email :</h2>
-          <input type="email" name="forget_pass" id="forget_pass_input" #forget />
-        </div>
-        <div class="modal-footer">
-          <button (click)="forget_pass_first_step(forget.value)">Next</button>
-        </div>
+          <input type="password" id="password" name="password" [(ngModel)]="formData.password" required>
       </div>
-    </div>
-  </div>
-  
-  <div
-    class="modal fade"
-    id="verify_email_to_change"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="exampleModalCenterTitle"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">
-            Verification code
-          </h5>
-          <button class="outer_button" disabled>
-            <button
-              type="button"
-              class="close close1"
-              data-dismiss="modal"
-              aria-label="Close"
-              (click)="close_popup()"
-
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </button>
-        </div>
-        <div class="modal-body">
-          <h2>Enter Verification code :</h2>
-          <input
-            type="text"
-            name="forget_pass"
-            id="forget_pass_input"
-            #verify_code
-          />
-        </div>
-        <div class="modal-footer">
-          <button (click)="forget_pass_second_step(verify_code.value)">
-            Next
-          </button>
-        </div>
+      <div class="form-group">
+          <label>Role</label>
+          <div class="radio-group">
+              <label><input type="radio" name="role" [(ngModel)]="formData.role" value="ADOPTER"> ADOPTER</label>
+              <label><input type="radio" name="role" [(ngModel)]="formData.role" value="MANAGER"> MANAGER</label>
+              <label><input type="radio" name="role" [(ngModel)]="formData.role" value="STAFF"> STAFF</label>
+          </div>
       </div>
-    </div>
-  </div>
-  
-  <div
-    class="modal fade"
-    id="change_pass"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="exampleModalCenterTitle"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">New Password</h5>
-          <button class="outer_button" disabled>
-            <button
-              type="button"
-              class="close close1"
-              data-dismiss="modal"
-              aria-label="Close"
-              (click)="close_popup()"
-
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </button>
-        </div>
-        <div class="modal-body">
-          <h2>Enter New Password :</h2>
-          <input
-            type="text"
-            name="forget_pass"
-            id="forget_pass_input"
-            #new_pass
-          />
-        </div>
-        <div class="modal-footer">
-          <button (click)="forget_pass_final_step(new_pass.value)">Next</button>
-        </div>
+      <div class="form-group">
+          <button type="submit">Sign In</button>
       </div>
-    </div>
-  </div>
-  
-  <app-pop-up></app-pop-up>
-  
+  </form>
+  <a routerLink="/signup" class="signup-link">Don't have an email? Sign up now</a>
+</div>
