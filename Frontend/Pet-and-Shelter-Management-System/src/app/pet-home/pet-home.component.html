@@ -1,7 +1,7 @@
 <div class="container">
   <div class="section12">
     <div class="section section1">
-      <div class="name" *ngIf="current_user">
+      <div class="name" *ngIf="current_pet">
         <button style="all: unset" (click)="logout()">
           <i
             title="Logout"
@@ -15,13 +15,13 @@
           data-target="#edit_photo"
           class="image"
           id="img_home"
-          [src]="current_user.photo"
+          [src]="current_pet.image"
           alt="user photo"
           style="background-color: #008182"
         />
         <div class="name2">
           <label
-            > Hunter </label
+            > {{current_pet.name}} </label
           >
           <label id="id" style="font-size: 13px">#1</label>
         </div>

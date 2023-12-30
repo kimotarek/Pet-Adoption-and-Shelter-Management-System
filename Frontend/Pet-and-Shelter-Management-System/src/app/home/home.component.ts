@@ -183,6 +183,8 @@ export class HomeComponent {
   }
   select_pet(pet:Pets){
     this.selected_pet=pet
+    this.service.pet_profile=pet;
+    this.route.navigate(['pet_home/pet_profile']);
   }
   close_popup() {
     $('#pet_details').modal('hide');

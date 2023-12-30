@@ -9,12 +9,11 @@ import { Pets } from 'src/app/objects/pets';
 export class PetServiceService {
 
   private apiServerUrl = 'http://localhost:8080/api/pet';
-
-
   constructor(private http: HttpClient) { }
 
 
-
+  pet_profile:Pets=new Pets();
+  
   public add_pet(pet:Pets):Observable<any>{
     return this.http.post<any>(`${this.apiServerUrl}/add`,pet, { withCredentials: true });
   }
@@ -35,4 +34,8 @@ export class PetServiceService {
     return this.http.get<any>(`${this.apiServerUrl}/shelterPets/${shelter_id}`, { withCredentials: true });
   }
   
+  public get_pet_profile(pet_id:any):Observable<any>{
+    return this.http.get<any>(`${this.apiServerUrl}/get_pet_profile/${pet_id}`, { withCredentials: true });
+  }
+
 }

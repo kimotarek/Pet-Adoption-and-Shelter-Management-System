@@ -32,7 +32,7 @@ export class StaffApplicationComponent {
   constructor(private service:ApplicationServiceService) {
     
     this.service.get_apps("karim").subscribe((x) => {
-      let extractedArray = x.filter((item:any) => item.statusOfApp === "pendding");
+      let extractedArray = x.filter((item:any) => item.statusOfApp === "pending");
       this.ApplicationDTO=extractedArray;
       error: (error: HttpErrorResponse) => alert(error.message);
     });
@@ -42,14 +42,14 @@ export class StaffApplicationComponent {
   Accept(app:any){
 
     this.service.response_app("accepted",app.idOfApp).subscribe((x) => {
-      let extractedArray = x.filter((item:any) => item.statusOfApp === "pendding");
+      let extractedArray = x.filter((item:any) => item.statusOfApp === "pending");
       this.ApplicationDTO=extractedArray;
       error: (error: HttpErrorResponse) => alert(error.message);
     });
   }
   reject(app:any){
     this.service.response_app("declined",app.idOfApp).subscribe((x) => {
-      let extractedArray = x.filter((item:any) => item.statusOfApp === "pendding");
+      let extractedArray = x.filter((item:any) => item.statusOfApp === "pending");
       this.ApplicationDTO=extractedArray;
       error: (error: HttpErrorResponse) => alert(error.message);
     });

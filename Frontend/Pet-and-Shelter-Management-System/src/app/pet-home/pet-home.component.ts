@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ModalPopServiceService } from '../services/modal-pop-service-service.service';
 import { Router } from '@angular/router';
+import { Pets } from '../objects/pets';
+import { PetServiceService } from '../services/petService/pet-service.service';
 
 @Component({
   selector: 'app-pet-home',
@@ -16,19 +18,16 @@ export class PetHomeComponent {
   photo_url: any = null;
   photo_event_service: any = null;
   photo_sendin_service: any;
-  current_user = {
-    first_name: 'Ahmed',
-    last_name: 'Ali',
-    photo: '../../assets/images/user.jpg',
-    _id: '1256893',
-  };
+  current_pet:Pets=new Pets()
   constructor(
     // private service: ServicService,
     private sanitizer: DomSanitizer,
     private router: Router,
-    private popup: ModalPopServiceService
+    private popup: ModalPopServiceService,
+    private service:PetServiceService
   ) {
    
+    this.current_pet = this.service.pet_profile
     // this.get_user_photo();
   }
 

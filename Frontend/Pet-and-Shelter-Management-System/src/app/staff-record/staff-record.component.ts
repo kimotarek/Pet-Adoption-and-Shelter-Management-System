@@ -27,7 +27,7 @@ export class StaffRecordComponent {
   constructor(private service:ApplicationServiceService) {
     
     this.service.get_apps("karim").subscribe((x) => {
-      let extractedArray = x.filter((item:any) => item.statusOfApp != "pendding");
+      let extractedArray = x.filter((item:any) => item.statusOfApp != "pending");
       this.ApplicationDTO=extractedArray;
       error: (error: HttpErrorResponse) => alert(error.message);
     });
