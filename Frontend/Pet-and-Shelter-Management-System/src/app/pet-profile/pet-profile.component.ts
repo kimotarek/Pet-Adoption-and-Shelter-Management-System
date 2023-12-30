@@ -67,7 +67,9 @@ export class PetProfileComponent {
   }
 
   Adopt(){
-    this.service.add_pet(1,'ibrahim').subscribe((x) => {
+    let name =localStorage.getItem('userName');
+    let petid=this.servicepet.pet_profile.id;
+    this.service.add_pet(petid,name).subscribe((x) => {
       console.log(x)
       this.close();
       error: (error: HttpErrorResponse) => alert(error.message);

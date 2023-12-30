@@ -41,6 +41,7 @@ export class SignUpComponent implements OnInit {
     // this.signup_user = user;
     this.serviceshelter.get_Shelter().subscribe((x) => {
       this.shelterArray=x;
+      console.log(x)
       error: (error: HttpErrorResponse) => alert(error.message);
     });
     
@@ -119,7 +120,7 @@ export class SignUpComponent implements OnInit {
         if(this.selectedRole == 'ADOPTER'){
           this.router.navigate(['/home']);
         }
-        else if(this.selectedRole == 'MANGER'){
+        else if(this.selectedRole == 'MANAGER'){
           this.router.navigate(['/admin_home/add_shelter']);
         }
         else if(this.selectedRole == 'STAFF'){

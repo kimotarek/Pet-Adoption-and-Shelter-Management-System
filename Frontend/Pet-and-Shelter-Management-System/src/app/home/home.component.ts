@@ -19,6 +19,8 @@ export class HomeComponent {
   isadmin: boolean = false;
   isLogin = false;
   selected_pet:Pets=new Pets();
+  searchValue: string = '';
+  searchCriteria: string = 'breed';
   petArray: Pets[] = [
     {
       age: '1 year',
@@ -51,74 +53,6 @@ export class HomeComponent {
       image: '../../assets/images/cat.jpeg',
       shelter_name: 'Pet Care Shelter',
       idOfShelter: '105',
-      vaccination:1,
-      neutering:1,
-    },
-    {
-      age: '8 months',
-      name: 'Rocky',
-      species: 'Dog',
-      breed: 'Labrador Retriever',
-      id: '4',
-      gender: 'Male',
-      healthStatus: 'Very Good',
-      behaviour: 'Friendly and Energetic',
-      description:
-        'Appearance: Labrador Retrievers are medium to large-sized dogs with a strong build. They have a short, dense water-resistant coat. Coat colors include yellow, black, and chocolate. Labrador Retrievers have a broad head, expressive eyes, and a distinctive otter tail.',
-      image: '../../assets/images/dog.jpeg',
-      shelter_name: 'New Shelter',
-      idOfShelter: '104',
-      vaccination:1,
-      neutering:1,
-    },
-    {
-      age: '1 Year and 3 Months',
-      name: 'Whiskers',
-      species: 'Cat',
-      breed: 'Persian',
-      id: '5',
-      gender: 'Male',
-      healthStatus: 'Fair',
-      behaviour: 'Calm and Independent',
-      description:
-        'Appearance: Persian cats are known for their long, luxurious coats and flat faces. They have large, expressive eyes and a distinctive round head. Coat colors can vary widely, and their grooming needs are extensive.',
-      image: '../../assets/images/cat2.jpeg',
-      shelter_name: 'old Shelter',
-      idOfShelter: '103',
-      vaccination:1,
-      neutering:1,
-    },
-    {
-      age: '2 Years',
-      name: 'Luna',
-      species: 'Dog',
-      breed: 'Siberian Husky',
-      id: '1',
-      gender: 'Female',
-      healthStatus: 'Excellent',
-      behaviour: 'Playful and Independent',
-      description:
-        'Appearance: Siberian Huskies are medium-sized working dogs with a thick double coat. They have erect triangular ears, distinctive markings, and striking blue or multicolored eyes. Siberian Huskies are known for their wolf-like appearance.',
-      image: '../../assets/images/dog1.jpeg',
-      shelter_name: 'Pet Care Shelter',
-      idOfShelter: '102',
-      vaccination:1,
-      neutering:1,
-    },
-    {
-      age: '1 Year',
-      name: 'Oreo',
-      species: 'Rabbit',
-      breed: 'Holland Lop',
-      id: '6',
-      gender: 'Male',
-      healthStatus: 'Good',
-      behaviour: 'Gentle and Curious',
-      description:
-        'Appearance: Holland Lop rabbits are small with a distinctive lop ear (drooping ear) appearance. They have a compact, muscular body and a dense, soft coat. Coat colors can vary, and they often have a friendly and docile nature.',
-      image: '../../assets/images/rabbit.jpeg',
-      shelter_name: 'old Shelter',
-      idOfShelter: '101',
       vaccination:1,
       neutering:1,
     },
@@ -203,5 +137,17 @@ export class HomeComponent {
   close_popup() {
     $('#pet_details').modal('hide');
   }
+
+
+  searchPets() {
+    // Call the service method to search for pets based on searchValue and searchCriteria
+    this.service.searchPets(this.searchValue, this.searchCriteria).subscribe((result) => {
+      for(let i=0 ; i<result.length; i++){
+        result[i].image = `data:image/jpeg;base64,${result[i].image}`;
+      }
+      this.petArray = result;
+    });
+  }
+
 
 }

@@ -74,10 +74,11 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('token', response.token);
           localStorage.setItem('userName', this.formData.userName);
           localStorage.setItem('role',this.formData.role);
+          console.log(this.formData.role)
           if(this.formData.role == 'ADOPTER'){
             this.router.navigate(['/home']);
           }
-          else if(this.formData.role == 'MANGER'){
+          else if(this.formData.role == 'MANAGER'){
             this.router.navigate(['/admin_home/add_shelter']);
           }
           else if(this.formData.role == 'STAFF'){

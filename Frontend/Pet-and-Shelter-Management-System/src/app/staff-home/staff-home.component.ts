@@ -81,7 +81,11 @@ export class StaffHomeComponent {
     }
   }
 
-  logout() {
- 
+  logout(): void {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userName")
+    localStorage.removeItem("role")
+
+    this.router.navigate(['']);
   }
 }

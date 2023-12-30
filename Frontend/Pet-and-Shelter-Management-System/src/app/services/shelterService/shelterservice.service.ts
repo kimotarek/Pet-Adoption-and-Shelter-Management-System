@@ -31,5 +31,8 @@ export class ShelterserviceService {
   public get_Shelter():Observable<any>{
     return this.http.get<any>(`${this.apiServerUrl}/getShelter`, { withCredentials: true });
   }
+  public getShelteridbyusername(staffUserName:any):Observable<any>{
+    return this.http.get<any>(`${this.apiServerUrl}/name/${staffUserName}`, {headers: this.headers, withCredentials: true });
+  }
   
 }

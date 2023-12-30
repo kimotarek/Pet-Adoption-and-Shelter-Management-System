@@ -21,6 +21,17 @@
       </button>
     </div>
 
+    <!-- Add this at the beginning of your HTML file -->
+<div class="search-container">
+  <input type="text" [(ngModel)]="searchValue" placeholder="Search..." style="margin-left: 1rem;">
+  <select [(ngModel)]="searchCriteria" style="margin-left: 1rem;">
+    <option value="breed">Breed</option>
+    <option value="age">Age</option>
+    <option value="shelter_location">Shelter Location</option>
+  </select>
+  <button (click)="searchPets()" style="margin-left: 1rem;">Search</button>
+</div>
+
     <div class="navbar-nav flex-grow-1">
       <div class="navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
@@ -103,6 +114,8 @@
     </a>
   </div>
 </header>
+
+
 
 <div class="contain">
   <div class="discoverexamswidgets">

@@ -28,7 +28,8 @@ export class NotificationComponent {
 
   constructor(private service:NotificationserviceService) {
     
-    this.service.get_notification().subscribe((x) => {
+    let user_name=localStorage.getItem("userName");
+    this.service.get_notification(user_name).subscribe((x) => {
       console.log(x)
       this.notification=x;
       error: (error: HttpErrorResponse) => alert(error.message);

@@ -18,9 +18,8 @@ export class NotificationserviceService {
   };
 
 
-  public get_notification():Observable<any>{
-    let userName ="ibrahim"
-    return this.http.get<any>(`${this.apiServerUrl}/get_notification/${userName}`, { headers: this.headers, withCredentials: true });
+  public get_notification(user_name:any):Observable<any>{
+    return this.http.get<any>(`${this.apiServerUrl}/get_notification/${user_name}`, { headers: this.headers, withCredentials: true });
   }
 
 }

@@ -25,7 +25,7 @@ export class AdminHomeComponent implements OnInit {
     private router: Router,
     private popup: ModalPopServiceService
   ) {
-   
+    this.current_user.first_name = localStorage.getItem('userName') ?? '';
     // this.get_user_photo();
   }
 
@@ -79,7 +79,11 @@ export class AdminHomeComponent implements OnInit {
     }
   }
 
-  logout() {
- 
+  logout(): void {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userName")
+    localStorage.removeItem("role")
+
+    this.router.navigate(['']);
   }
 }

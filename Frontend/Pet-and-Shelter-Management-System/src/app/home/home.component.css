@@ -413,6 +413,12 @@ div {
     transition: 1s;
   }
 
+  .search-container{
+    padding: 1rem;
+    margin-left: 1rem;
+    
+  }
+
   
   /* Adjustments for smaller screens */
   @media (max-width: 768px) {

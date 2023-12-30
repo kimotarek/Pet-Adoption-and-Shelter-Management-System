@@ -5,6 +5,7 @@ import { PetServiceService } from '../services/petService/pet-service.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { speciebreed } from '../objects/speciebreed';
 import { BreedServiceService } from '../services/breedService/breed-service.service';
+import { ShelterserviceService } from '../services/shelterService/shelterservice.service';
 declare const $: any;
 @Component({
   selector: 'app-add-pet',
@@ -130,22 +131,27 @@ export class AddPetComponent {
   selectedBreed: speciebreed = new speciebreed();
   constructor(
     private service: PetServiceService,
-    private service2: BreedServiceService
+    private service2: BreedServiceService,
+    private serviceshelter:ShelterserviceService
   ) {
     this.service2.get_Breed().subscribe((res) => {
       this.breed = res;
     });
 
-
-    //cokies
-    this.service.shelter_pets(2).subscribe((x) => {
+    let name =localStorage.getItem('userName');
+    this.serviceshelter.getShelteridbyusername(name).subscribe((x) => {
       console.log(x);
-
-      for(let i=0 ; i<x.length; i++){
-        x[i].image = `data:image/jpeg;base64,${x[i].image}`;
-      }
-      this.petArray=x;
+      this.service.shelter_pets(x).subscribe((x) => {
+        console.log(x);
+  
+        for(let i=0 ; i<x.length; i++){
+          x[i].image = `data:image/jpeg;base64,${x[i].image}`;
+        }
+        this.petArray=x;
+      });
     });
+    //cokies
+  
   }
 
   ngOnInit(): void {

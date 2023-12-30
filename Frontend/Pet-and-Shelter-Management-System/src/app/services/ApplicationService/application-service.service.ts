@@ -20,8 +20,8 @@ export class ApplicationServiceService {
   public add_pet(pet_id:any,adopterUserName:any):Observable<any>{
     let app:Application = new Application();
     app.status = "pending";
-    app.petId = 2;
-    app.adopterUserName = "ibrahim";
+    app.petId = pet_id
+    app.adopterUserName = adopterUserName;
     return this.http.post<any>(`${this.apiServerUrl}/add`,app, { headers: this.headers,withCredentials: true });
   }
   public get_apps(staff_name:any):Observable<any>{

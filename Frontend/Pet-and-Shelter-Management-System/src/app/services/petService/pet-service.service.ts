@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Pets } from 'src/app/objects/pets';
@@ -27,7 +27,7 @@ export class PetServiceService {
     return this.http.post<any>(`${this.apiServerUrl}/delete/${pet_id}`, { headers: this.headers, withCredentials: true });
   }
   
-  public upload_files(pet_id:any):Observable<any>{
+  public upload_files():Observable<any>{
     return this.http.post<any>(`http://localhost:8080/api/pet-documents/upload`, {headers: this.headers, withCredentials: true });
   }
   public get_all():Observable<any>{
@@ -37,8 +37,17 @@ export class PetServiceService {
     return this.http.get<any>(`${this.apiServerUrl}/shelterPets/${shelter_id}`, {headers: this.headers, withCredentials: true });
   }
   
+  
   public get_pet_profile(pet_id:any):Observable<any>{
     return this.http.get<any>(`${this.apiServerUrl}/get_pet_profile/${pet_id}`, { headers: this.headers, withCredentials: true });
+  }
+
+  public searchPets(searchValue: string, searchCriteria: string): Observable<any> {
+    // const params = new HttpParams()
+    //   .set('searchValue', searchValue)
+    //   .set('searchCriteria', searchCriteria);
+  
+    return this.http.get<any>(`${this.apiServerUrl}/searchPets/${searchCriteria}/${searchValue}`, {  headers: this.headers, withCredentials: true });
   }
 
 }
