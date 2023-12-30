@@ -38,6 +38,7 @@ export class HomeComponent {
       idOfShelter: '106',
       vaccination:1,
       neutering:1,
+      shelterLocation: 'Cairo',
     },
     {
       age: '30 days',
@@ -55,6 +56,8 @@ export class HomeComponent {
       idOfShelter: '105',
       vaccination:1,
       neutering:1,
+      shelterLocation: 'Cairo',
+
     },
   ];
 

@@ -13,7 +13,7 @@ declare const $: any;
   styleUrls: ['./add-pet.component.css'],
 })
 export class AddPetComponent {
-  petArray: Pets[] = []
+  petArray: Pets[] = [];
   //   {
   //     age: '4',
   //     name: 'Hunter',
@@ -127,32 +127,36 @@ export class AddPetComponent {
   petGender: boolean = true;
   breed: speciebreed[] = [];
   files: FormData[] = [];
+  id_of_shelter: any = '';
 
   selectedBreed: speciebreed = new speciebreed();
   constructor(
     private service: PetServiceService,
     private service2: BreedServiceService,
-    private serviceshelter:ShelterserviceService
+    private serviceshelter: ShelterserviceService
   ) {
     this.service2.get_Breed().subscribe((res) => {
       this.breed = res;
     });
 
-    let name =localStorage.getItem('userName');
+    let name = localStorage.getItem('userName');
     this.serviceshelter.getShelteridbyusername(name).subscribe((x) => {
       console.log(x);
+      this.id_of_shelter = x;
       this.service.shelter_pets(x).subscribe((x) => {
         console.log(x);
-  
-        for(let i=0 ; i<x.length; i++){
+
+        for (let i = 0; i < x.length; i++) {
           x[i].image = `data:image/jpeg;base64,${x[i].image}`;
         }
-        this.petArray=x;
+        this.petArray = x;
       });
     });
     //cokies
-  
   }
+  public headers = {
+    Authorization: `Bearer ${localStorage.getItem('token')}`,
+  };
 
   ngOnInit(): void {
     // Your code here
@@ -230,27 +234,21 @@ export class AddPetComponent {
     x.description = pet_description;
     x.healthStatus = pet_health;
     //cookies
-    x.idOfShelter = 2;
-    if(this.selectedNeutering==true){
+    x.idOfShelter = this.id_of_shelter;
+    if (this.selectedNeutering == true) {
       x.neutering = 1;
-    }
-    else{
+    } else {
       x.neutering = 0;
-
     }
-    if (this.selectedVaccination==true){
-      x.vaccination = 1 ;
+    if (this.selectedVaccination == true) {
+      x.vaccination = 1;
+    } else {
+      x.vaccination = 0;
     }
-    else{
-      x.vaccination =0 ;
-
-    }
-    if (this.petGender==true){
-      x.gender = 1 ;
-    }
-    else{
-      x.gender =0 ;
-
+    if (this.petGender == true) {
+      x.gender = 1;
+    } else {
+      x.gender = 0;
     }
     x.species = this.selectedBreed.specie;
     x.breed = this.selectedBreed.breed;
@@ -260,9 +258,10 @@ export class AddPetComponent {
     this.close_popup();
     //serviec add new address and recieve id and set it
     this.service.add_pet(x).subscribe((res) => {
+      console.log(x);
       this.petArray[this.petArray.length - 1].id = res;
-      console.log(res)
-       if (this.files.length != 0) {
+      console.log(res);
+      if (this.files.length != 0) {
         if (this.files[0] != null) {
           this.files[0].append('petId', res);
         }
@@ -271,16 +270,21 @@ export class AddPetComponent {
         }
         fetch(`http://localhost:8080/api/pet-documents/upload`, {
           method: 'POST',
+          headers: this.headers,
+          credentials: 'include', // Instead of withCredentials: true
           body: this.files[0],
         });
         fetch(`http://localhost:8080/api/pet-documents/upload`, {
           method: 'POST',
+          headers: this.headers,
+          credentials: 'include', // Instead of withCredentials: true
           body: this.files[1],
         });
       }
       this.selectedVaccination = false;
       this.selectedNeutering = false;
       this.selectedBreed = new speciebreed();
+      this.files = [];
       error: (error: HttpErrorResponse) => alert(error.message);
     });
   }
@@ -291,7 +295,6 @@ export class AddPetComponent {
     const formdata = new FormData();
     formdata.append('file', fileInput);
     formdata.append('fileType', 'IMAGE');
-
     this.files[0] = formdata;
   }
 

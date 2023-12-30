@@ -14,6 +14,7 @@ export class Pets{
     idOfShelter:any;
     neutering:any;
     vaccination:any;
+    shelterLocation:any;
 
   }
   

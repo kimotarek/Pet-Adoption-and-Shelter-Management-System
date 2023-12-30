@@ -12,13 +12,7 @@
       <button data-toggle="modal" data-target="#edit" (click)="edit(pet, i)">
         <i class="fa-solid fa-pen"></i>
       </button>
-      <button
-        (click)="remove(pet, i)"
-        data-toggle="modal"
-        data-target="#confirm"
-      >
-        <i class="fa-solid fa-trash"></i>
-      </button>
+  
     </div>
     <div class="name2">
       <img [src]="pet.image" class="image" style="background-color: #008182" />
@@ -37,6 +31,7 @@
       <li>Breed: {{ pet.breed }}</li>
       <li>Health Status: {{ pet.healthStatus }}</li>
       <li>Behavior: {{ pet.behaviour }}</li>
+      <li>shelter Location: {{ pet.shelterLocation }}</li>
       <li>Vaccination: {{ pet.vaccination=='0'?"Yes":'No'}}</li>
       <li>Neutering: {{ pet.neutering=='0'?"Yes":'No' }}</li>
     </ul>
