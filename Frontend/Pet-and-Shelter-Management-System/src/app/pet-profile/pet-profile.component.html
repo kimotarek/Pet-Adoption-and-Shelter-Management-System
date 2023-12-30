@@ -1,0 +1,214 @@
+<div class="locations">
+    <button
+      data-toggle="modal"
+      data-target="#confirm"
+      class="add"
+    >
+      Adopt Now <i class="fa-solid fa-plus"></i>
+    </button>
+    <!-- ng for -->
+  </div>
+
+
+
+  <!-- <div
+  class="modal fade"
+  id="add"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+          <button
+            type="button"
+            class="close close1"
+            data-dismiss="modal"
+            aria-label="Close"
+            (click)="close_popup()"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Shelter Name:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput1"
+            placeholder="Enter Name of Shelter"
+            #shelter_name
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="exampleFormControlInput2">Shelter Location</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput2"
+            placeholder="Enter Location of Shelter"
+            #Shelter_location
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput3">Shelter Contact</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput3"
+            placeholder="Enter Contact Info for Shelter"
+            #Shelter_contact
+          />
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button
+        (click)="
+            add_shelter(
+                shelter_name.value,
+                Shelter_location.value,
+                Shelter_contact.value
+            )
+        "
+          type="button"
+          id="addnewlocation"
+        >
+          Add <i class="fa-solid fa-plus"></i>
+        </button>
+        <button
+          (click)="close_popup()"
+          type="button"
+          id="addnewlocation"
+          style="background-color: #ff0052"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- <div
+  class="modal fade"
+  id="edit"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+          <button
+            type="button"
+            class="close close1"
+            data-dismiss="modal"
+            aria-label="Close"
+            (click)="close_popup()"
+          >
+            <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="exampleFormControlInput4">Shelter Name</label>
+          <input
+            [value]="edit_ad.name"
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput4"
+            #ed_name
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput4">Shelte Location</label>
+          <input
+            [value]="edit_ad.location"
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput4"
+            #ed_location
+          />
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput4">Shelte Contact</label>
+            <input
+              [value]="edit_ad.contactInfo"
+              type="text"
+              class="form-control"
+              id="exampleFormControlInput4"
+              #ed_Contact
+            />
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          (click)="totaly_edit(ed_name.value, ed_location.value,ed_Contact.value)"
+          type="button"
+          id="addnewlocation"
+        >
+          Edit Shelter <i class="fa-solid fa-plus"></i>
+        </button>
+        <button
+          (click)="close_popup()"
+          type="button"
+          id="addnewlocation"
+          style="background-color: #ff0052"
+        >
+          Cancel Edit
+        </button>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div
+  class="modal fade"
+  id="confirm"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">
+          <p style="color:#008182;">Confirmation Adopt</p>
+        </h5>
+          <button
+            type="button"
+            class="close close1"
+            data-dismiss="modal"
+            aria-label="Close"
+            (click)="close()"
+
+          >
+            <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to Adopt this pet?
+      </div>
+      <div class="modal-footer">
+        <button (click)="Adopt()" class="discoverbtns btn_exam">
+          YES
+        </button>
+        <button
+          style="background-color: #ff0052"
+          class="discoverbtns btn_exam"
+          (click)="close()"
+        >
+          NO
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

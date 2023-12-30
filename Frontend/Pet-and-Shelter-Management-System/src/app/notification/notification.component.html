@@ -1,0 +1,28 @@
+<div class="locations">
+  <div
+    *ngFor="let note of notification; let i = index"
+    class="card card-body taken"
+  >
+    <div style="margin-left: 40%; font-size: larger; font-weight: 600">
+      <i class="fa-regular fa-bell" style="margin-right: 5px"></i>
+      <label> Notification {{ i + 1 }}</label>
+      <br>
+      <br>
+    </div>
+
+    <table>
+      <tr>
+        <label style="font-weight: 500; color:#008182;">Notification Content:</label>
+        <div style="font-weight: 600;">
+          <label>{{ note.content }}</label>
+        </div>
+      </tr>
+      <tr>
+        <div>
+          <label style="font-weight: 500; color:#008182;display: block;">Notification date:</label>
+          <label style="font-weight: 600;">{{ note.date }}</label>
+        </div>
+      </tr>
+    </table>
+  </div>
+</div>

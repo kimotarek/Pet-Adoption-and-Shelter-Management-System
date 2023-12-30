@@ -1,0 +1,54 @@
+<div class="locations">
+  <div
+    *ngFor="let app of ApplicationDTO; let i = index"
+    class="card card-body taken"
+  >
+    <table>
+      <tr>
+        <div class="card-text takenbox">
+          <td><label class="card-title">Pet Name</label></td>
+          <td>
+            <div class="takeninfo">
+              <label>{{ app.petName }}</label>
+            </div>
+          </td>
+        </div>
+      </tr>
+      <tr>
+        <div class="card-text takenbox">
+          <td><label class="card-title">Adopter Name </label></td>
+          <td>
+            <div class="takeninfo">
+              <label>{{ app.adopterName }}</label>
+            </div>
+          </td>
+        </div>
+      </tr>
+      <tr>
+        <div class="card-text takenbox">
+          <td><label class="card-title">Status</label></td>
+          <td>
+            <div class="takeninfo">
+              <label>{{ app.statusOfApp }}</label>
+            </div>
+          </td>
+        </div>
+      </tr>
+    </table>
+    <button
+      class="btn_Accept yes"
+      *ngIf="app.statusOfApp == 'pendding'"
+      (click)="Accept(app)"
+    >
+      Accept
+    </button>
+    <button
+      class="btn_Accept no"
+      *ngIf="app.statusOfApp == 'pendding'"
+      (click)="reject(app)"
+      style="background-color: #ff0052"
+    >
+      Declined
+    </button>
+  </div>
+</div>

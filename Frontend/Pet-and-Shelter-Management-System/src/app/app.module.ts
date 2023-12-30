@@ -13,9 +13,14 @@ import { AddShelterComponent } from './add-shelter/add-shelter.component';
 import { AddStaffComponent } from './add-staff/add-staff.component';
 import { StaffHomeComponent } from './staff-home/staff-home.component';
 import { AddPetComponent } from './add-pet/add-pet.component';
-import { ShowApplicationComponent } from './show-application/show-application.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AddBreedComponent } from './add-breed/add-breed.component';
+import { NotificationComponent } from './notification/notification.component';
+import { UserHomeComponent } from './user-home/user-home.component';
+import { PetProfileComponent } from './pet-profile/pet-profile.component';
+import { PetHomeComponent } from './pet-home/pet-home.component';
+ import { StaffApplicationComponent } from './staff-application/staff-application.component';
+import { StaffRecordComponent } from './staff-record/staff-record.component';
 
 @NgModule({
   declarations: [
@@ -29,8 +34,13 @@ import { AddBreedComponent } from './add-breed/add-breed.component';
     AddStaffComponent,
     StaffHomeComponent,
     AddPetComponent,
-    ShowApplicationComponent,
     AddBreedComponent,
+    NotificationComponent,
+    UserHomeComponent,
+    PetProfileComponent,
+    PetHomeComponent,
+    StaffApplicationComponent,
+    StaffRecordComponent,
 
   ],
   imports: [
